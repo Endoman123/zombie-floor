@@ -1,0 +1,43 @@
+
+hud.png
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+hotbar
+  rotate: false
+  xy: 1, 35
+  size: 301, 80
+  orig: 301, 80
+  offset: 0, 0
+  index: -1
+barback
+  rotate: false
+  xy: 304, 50
+  size: 65, 65
+  split: 11, 11, 11, 11
+  orig: 65, 65
+  offset: 0, 0
+  index: -1
+hotbarselection
+  rotate: false
+  xy: 371, 51
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+bar
+  rotate: false
+  xy: 1, 1
+  size: 32, 32
+  split: 0, 0, 0, 0
+  orig: 32, 32
+  offset: 0, 0
+  index: -1
+staminabar
+  rotate: false
+  xy: 437, 83
+  size: 32, 32
+  split: 0, 0, 0, 0
+  orig: 32, 32
+  offset: 0, 0
+  index: -1
