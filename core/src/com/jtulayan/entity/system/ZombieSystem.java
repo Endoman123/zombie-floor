@@ -97,7 +97,7 @@ public class ZombieSystem extends IteratingSystem {
             } else {
                 ai.randomTimer -= deltaTime;
                 if (ai.randomTimer <= 0) {
-                    ai.targetDirection = 180 + MathUtils.random(-30, 30);
+                    ai.targetDirection = 180 + MathUtils.random(-45, 45);
                     ai.randomTimer = MathUtils.random(1, 10);
                 }
             }
@@ -135,7 +135,7 @@ public class ZombieSystem extends IteratingSystem {
                 else if (ai.attackTimer > 0)
                     ai.attackTimer -= deltaTime;
                 else if (ai.attackTimer <= 0) {
-                    getEngine().addEntity(GameObjects.createSlash(transform.WORLD_ORIGIN.x, transform.WORLD_ORIGIN.y, ai.attackRange, transform.rotation, getEngine()));
+                    getEngine().addEntity(GameObjects.createSlash(transform.WORLD_ORIGIN.x, transform.WORLD_ORIGIN.y, ai.attackRange, transform.rotation));
                     ai.attackTimer = 1 / ai.attackRate;
                 }
             }

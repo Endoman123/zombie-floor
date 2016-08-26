@@ -30,6 +30,8 @@ public class ItemSystem extends IteratingSystem {
                     getEngine().removeEntity(entity);
                 }
             }
+        } else {
+            health.health = health.maxHealth;
         }
     }
 }

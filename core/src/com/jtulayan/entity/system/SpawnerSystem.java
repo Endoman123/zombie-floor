@@ -57,6 +57,17 @@ public class SpawnerSystem extends IteratingSystem {
                     if (zombieCount < 50)
                         getEngine().addEntity(GameObjects.createZombie(x, y));
                     break;
+
+                case ITEM:
+                    int chance = MathUtils.random(1, 10);
+
+                    if (chance >= 3)
+                        getEngine().addEntity(GameObjects.createAmmoBox(x, y, 120));
+                    else if (chance < 8)
+                        getEngine().addEntity(GameObjects.createBandage(x, y, 120));
+                    else
+                        getEngine().addEntity(GameObjects.createDressing(x, y, 120));
+                    break;
             }
 
             spawner.timer = MathUtils.random(spawner.MIN_TIME, spawner.MAX_TIME);

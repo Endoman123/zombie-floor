@@ -8,8 +8,8 @@ import com.badlogic.gdx.graphics.Camera;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.Intersector;
-import com.jtulayan.entity.component.ColliderComponent;
 import com.jtulayan.entity.Mapper;
+import com.jtulayan.entity.component.ColliderComponent;
 import com.jtulayan.entity.component.TransformComponent;
 
 /**
@@ -98,6 +98,14 @@ public class CollisionSystem extends IteratingSystem {
 
                 if (collider.handler != null)
                     collider.handler.exitCollision();
+            }
+        }
+
+        // Entities not in the engine will still exist in the array.
+        // Remove them all here.
+        for (Entity e : collider.collidingWith) {
+            if (!getEngine().getEntities().contains(e, true)) {
+                collider.collidingWith.removeValue(e, true);
             }
         }
     }

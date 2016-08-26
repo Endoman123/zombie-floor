@@ -29,7 +29,9 @@ public class GameScreen implements Screen {
         gameCam = new OrthographicCamera();
         ENGINE = new PooledEngine();
 
-        ENGINE.addSystem(new CollisionSystem(gameCam));
+        GameObjects.setEngine(ENGINE);
+
+        ENGINE.addSystem(new CollisionSystem(/*gameCam*/));
         ENGINE.addSystem(new RenderSystem(PARENT.getBatch(), gameCam, PARENT.getViewport()));
         ENGINE.addSystem(new PlayerSystem(gameCam));
         ENGINE.addSystem(new ZombieSystem(ENGINE.getSystem(PlayerSystem.class)));
@@ -38,7 +40,7 @@ public class GameScreen implements Screen {
         ENGINE.addSystem(new ItemSystem());
         ENGINE.addSystem(new SpawnerSystem());
 
-        Entity[] map = GameObjects.createMap("map.tmx").toArray(Entity.class);
+        Entity[] map = GameObjects.createMap("maps/map.tmx").toArray(Entity.class);
 
         MapProperties prop = Mapper.MAP_MAPPER.get(map[map.length - 1]).map.getProperties();
         MAP_SIZE = new Dimension2D(
@@ -49,10 +51,11 @@ public class GameScreen implements Screen {
         for (Entity e : map)
             ENGINE.addEntity(e);
 
-        ENGINE.addEntity(GameObjects.createPlayer(100, 100, PARENT.getViewport(), PARENT.getBatch(), PARENT.getAssets()));
+        ENGINE.addEntity(GameObjects.createPlayer(100, 100, PARENT.getViewport(), PARENT.getBatch()));
         ENGINE.addEntity(GameObjects.createZombie(300, 500));
-        ENGINE.addEntity(GameObjects.createM4(200, 200, -1, ENGINE));
-        ENGINE.addEntity(GameObjects.createBenelli(300, 200, -1, ENGINE));
+        ENGINE.addEntity(GameObjects.createM4(200, 200, 120));
+        ENGINE.addEntity(GameObjects.createBenelli(300, 200, 120));
+        ENGINE.addEntity(GameObjects.createAmmoBox(400, 200, 120));
 
 
     }

@@ -6,7 +6,6 @@ import com.badlogic.ashley.core.Entity;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.InputAdapter;
 import com.badlogic.gdx.graphics.Color;
-import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
@@ -36,6 +35,17 @@ import com.jtulayan.main.Assets;
  * @author Jared Tulayan
  */
 public class GameObjects {
+    private static Assets assets;
+    private static Engine engine;
+
+    public static void setAssets(Assets a) {
+        assets = a;
+    }
+
+    public static void setEngine(Engine e) {
+        engine = e;
+    }
+
     /**
      * Creates a new player at the specified coordinate
      *
@@ -43,14 +53,14 @@ public class GameObjects {
      * @param y the y-coordinate to place the player
      * @return an {@link Entity} with the {@link Component}s of a player attached.
      */
-    public static Entity createPlayer(float x, float y, Viewport v, Batch b, Assets assets) {
+    public static Entity createPlayer(float x, float y, Viewport v, Batch b) {
         final Entity e = new Entity();
         final TransformComponent transform = new TransformComponent();
         final InventoryComponent inventory = new InventoryComponent(1, 4, e);
         final InputComponent input = new InputComponent();
         final HealthComponent health = new HealthComponent();
         RenderComponent render = new RenderComponent();
-        ColliderComponent collider = new ColliderComponent();
+        final ColliderComponent collider = new ColliderComponent();
         CanvasComponent canvas = new CanvasComponent(v, b);
         final PlayerComponent player = new PlayerComponent();
         MovementComponent movement = new MovementComponent();
@@ -61,9 +71,8 @@ public class GameObjects {
         transform.POSITION.set(x, y);
         transform.WORLD_ORIGIN.set(x, y).sub(transform.LOCAL_ORIGIN);
 
-        Texture tex = new Texture(Gdx.files.internal("player.png"));
-        Sprite main = new Sprite(tex);
-        main.setSize(tex.getWidth(), tex.getHeight());
+        Sprite main = ((TextureAtlas) assets.MANAGER.get(Assets.GameObjects.ATLAS)).createSprite("player");
+        main.setSize(main.getRegionWidth(), main.getRegionHeight());
         main.setOrigin(transform.LOCAL_ORIGIN.x, transform.LOCAL_ORIGIN.y);
         render.SPRITES.add(main);
         render.z = 1;
@@ -106,19 +115,21 @@ public class GameObjects {
                 if (inventory.getActiveItem() != null && Mapper.GUN_MAPPER.has(inventory.getActiveItem())) {
                     GunComponent gun = Mapper.GUN_MAPPER.get(inventory.getActiveItem());
 
-                    if (gun.reloading && gun.gunTimer > 0)
-                        gun.gunTimer = gun.reloadRate;
+                    if (gun.reloading && gun.gunTimer > 0) {
+                        gun.reloading = false;
+                        gun.gunTimer = 1 / gun.fireRate;
+                    }
                 }
 
                 return true;
             }
         };
 
-        Skin skin = assets.MANAGER.get(Assets.UI.SKIN, Skin.class);
+        Skin skin = (Skin) assets.MANAGER.get(Assets.UI.SKIN);
 
         Table table = new Table(), bars = new Table();
 
-        final TextureAtlas hudAtlas = assets.MANAGER.get(Assets.HUD.ATLAS, TextureAtlas.class);
+        final TextureAtlas hudAtlas = (TextureAtlas) assets.MANAGER.get(Assets.HUD.ATLAS);
 
         final Image
                 grid = new Image(hudAtlas.findRegion("hotbar")),
@@ -127,16 +138,24 @@ public class GameObjects {
                 staminaBack = new Image(hudAtlas.createPatch("barback")),
                 healthFill = new Image(hudAtlas.createPatch("bar")),
                 staminaFill = new Image(hudAtlas.createPatch("staminabar"));
-        final Stack inventoryGrid = new Stack(grid, hot), healthBar = new Stack(healthBack, healthFill), staminaBar = new Stack(staminaBack, staminaFill);
 
-        bars.debugAll();
+        final Stack
+                inventoryGrid = new Stack(grid, hot),
+                healthBar = new Stack(healthBack, healthFill),
+                staminaBar = new Stack(staminaBack, staminaFill);
+
+        final Label action = new Label("", skin);
+
+        //bars.debugAll();
+        //table.debugAll();
+
         bars.add(healthBar).align(Align.left).width(256).height(32).row();
         bars.add(staminaBar).align(Align.left).width(128).height(32);
 
-        table.debugAll();
         table.pad(10).setFillParent(true);
         table.add(bars).align(Align.left).row();
         table.add().fillX().expandY().row();
+        table.add(action).align(Align.center).row();
         table.add(inventoryGrid).align(Align.center).expandX();
 
         for (int r = 0; r < inventory.STORAGE.length; r++) {
@@ -206,6 +225,21 @@ public class GameObjects {
                     label.setPosition(12 * (i + 1) + 64 * i, 9);
                 }
 
+                ItemComponent hoverOver = null;
+
+                for (Entity e : collider.collidingWith) {
+                    if (Mapper.ITEM_MAPPER.has(e)) {
+                        hoverOver = Mapper.ITEM_MAPPER.get(e);
+
+                        break;
+                    }
+                }
+
+                if (hoverOver != null)
+                    action.setText("Press 'E' to pickup " + hoverOver.name);
+                else
+                    action.setText("");
+
                 healthFill.setAlign(Align.bottomLeft);
                 healthFill.setPosition(11, 11, Align.bottomLeft);
                 healthFill.setHeight(healthBack.getHeight() - 22);
@@ -250,9 +284,8 @@ public class GameObjects {
         transform.POSITION.set(x, y);
         transform.WORLD_ORIGIN.set(x, y).sub(transform.LOCAL_ORIGIN);
 
-        Texture tex = new Texture(Gdx.files.internal("zombie.png"));
-        Sprite main = new Sprite(tex);
-        main.setSize(tex.getWidth(), tex.getHeight());
+        Sprite main = ((TextureAtlas) assets.MANAGER.get(Assets.GameObjects.ATLAS)).createSprite("zombie");
+        main.setSize(main.getRegionWidth(), main.getRegionHeight());
         main.setOrigin(transform.LOCAL_ORIGIN.x, transform.LOCAL_ORIGIN.y);
         render.SPRITES.add(main);
 
@@ -337,10 +370,9 @@ public class GameObjects {
      * @param direction the direction the bullet should travel
      * @param spread    the degree of inaccuracy
      * @param lifeTime  the amount of time before the bullet is destroyed (in seconds)
-     * @param ENGINE    the {@link Engine} to add the bullet to
      * @return an {@link Entity} with the {@link Component}s of a bullet attached
      */
-    public static Entity createBullet(float x, float y, float direction, float spread, float lifeTime, final Engine ENGINE) {
+    public static Entity createBullet(float x, float y, float direction, float spread, float lifeTime) {
         final Entity e = new Entity();
         TransformComponent transform = new TransformComponent();
         RenderComponent render = new RenderComponent();
@@ -358,12 +390,13 @@ public class GameObjects {
         movement.NORMAL.set(1, 0).rotate(transform.rotation);
         movement.translationSpeed = 1000f;
 
-        Sprite main = new Sprite(new Texture("bullet.png"));
+        Sprite main = ((TextureAtlas) assets.MANAGER.get(Assets.GameObjects.ATLAS)).createSprite("bullet");
         main.setSize(transform.width, transform.height);
         main.setOrigin(transform.LOCAL_ORIGIN.x, transform.LOCAL_ORIGIN.y);
         main.setAlpha(1f);
         render.SPRITES.add(main);
 
+        collider.solid = false;
         collider.body = new Polygon(new float[]{
                 0, 0,
                 1, 0,
@@ -374,11 +407,11 @@ public class GameObjects {
         collider.handler = new CollisionHandler() {
             @Override
             public void enterCollision(Entity e2, Intersector.MinimumTranslationVector m, boolean solid) {
-                if (solid && !Mapper.DAMAGE_MAPPER.has(e2)) {
+                if (solid) {
                     if (Mapper.HEALTH_MAPPER.has(e2))
                         Mapper.HEALTH_MAPPER.get(e2).health -= damage.damage;
 
-                    ENGINE.removeEntity(e);
+                    engine.removeEntity(e);
                 }
             }
         };
@@ -394,14 +427,13 @@ public class GameObjects {
      * Creates a "slash" damage object that is short lived.
      * On touch it is destroyed immediately, dealing damage to the player touching it.
      *
-     * @param x the x-coordinate to spawn it at
-     * @param y the y-coordinate to spawn it at
-     * @param r the range of the attack
+     * @param x   the x-coordinate to spawn it at
+     * @param y   the y-coordinate to spawn it at
+     * @param r   the range of the attack
      * @param rot the rotation of the attack object
-     * @param ENGINE the {@link Engine} to add this object to
      * @return an {@link Entity} configured to be a damage object, placed at a specified location with a specified rotation
      */
-    public static Entity createSlash(float x, float y, float r, float rot, final Engine ENGINE) {
+    public static Entity createSlash(float x, float y, float r, float rot) {
         final Entity E = new Entity();
         final TransformComponent TRANSFORM = new TransformComponent(x, y, r, r);
         final HealthComponent LIFETIME = new HealthComponent(0.1f);
@@ -414,23 +446,22 @@ public class GameObjects {
 
         DAMAGE.damage = 5;
 
-        COLLIDER.body = new Polygon(new float[] {
-            r, r,
-            r, 0,
-            0, r
+        COLLIDER.body = new Polygon(new float[]{
+                r, r,
+                r, 0,
+                0, r
         });
-        COLLIDER.body.setOrigin(0, 0);
+        COLLIDER.body.setOrigin(r / 2, r / 2);
         COLLIDER.body.setPosition(x, y);
         COLLIDER.body.setRotation(TRANSFORM.rotation);
         COLLIDER.handler = new CollisionHandler() {
             @Override
             public void updateCollision(Entity e, Intersector.MinimumTranslationVector mtv, boolean solid) {
                 if (Mapper.PLAYER_MAPPER.has(e)) {
-                    Gdx.app.log("COLLISION", "Player!");
                     HealthComponent health = Mapper.HEALTH_MAPPER.get(e);
 
                     health.health -= DAMAGE.damage;
-                    ENGINE.removeEntity(E);
+                    engine.removeEntity(E);
                 }
             }
         };
@@ -445,15 +476,14 @@ public class GameObjects {
      * Note that this entity should not be used as-is, rather as a base entity to build off of.
      *
      * @param lifeTime the amount of time before the item is destroyed (in seconds)
-     * @param ENGINE   the {@link Engine} to add the item to
      * @return an {@link Entity} with the {@link Component}s of a bullet attached
      */
-    private static Entity createItem(float lifeTime, final Engine ENGINE) {
+    private static Entity createItem(float lifeTime) {
         final Entity e = new Entity();
         final TransformComponent transform = new TransformComponent();
         RenderComponent render = new RenderComponent();
         ColliderComponent collider = new ColliderComponent();
-        HealthComponent life = new HealthComponent();
+        HealthComponent life = new HealthComponent(lifeTime);
         final MovementComponent movement = new MovementComponent();
         final ItemComponent item = new ItemComponent();
 
@@ -462,8 +492,6 @@ public class GameObjects {
         transform.rotation = MathUtils.random(360);
 
         movement.rotationSpeed = 30f;
-
-        life.maxHealth = life.health = lifeTime;
 
         e.add(transform).add(render).add(collider).add(life).add(item).add(movement);
 
@@ -476,11 +504,10 @@ public class GameObjects {
      * @param x        the x-coordinate to spawn the gun at
      * @param y        the y-coordinate to spawn the gun at
      * @param lifeTime the amount of time before the item despawns (in seconds).
-     * @param ENGINE   the {@link Engine} to add this item to.
      * @return an item {@link Entity} with the proper {@link Component}s for a gun
      */
-    public static Entity createM4(float x, float y, float lifeTime, final Engine ENGINE) {
-        final Entity e = createItem(lifeTime, ENGINE);
+    public static Entity createM4(float x, float y, float lifeTime) {
+        final Entity e = createItem(lifeTime);
         final ItemComponent item = Mapper.ITEM_MAPPER.get(e);
         final TransformComponent transform = Mapper.TRANSFORM_MAPPER.get(e);
         final ColliderComponent collider = Mapper.COLLIDER_MAPPER.get(e);
@@ -492,8 +519,7 @@ public class GameObjects {
         transform.height = 15;
         transform.POSITION.set(x, y).sub(transform.LOCAL_ORIGIN);
 
-        Texture main = new Texture("rifle.png");
-        Sprite sprite = new Sprite(main);
+        Sprite sprite = ((TextureAtlas) assets.MANAGER.get(Assets.GameObjects.ATLAS)).createSprite("rifle");
         sprite.setOrigin(transform.LOCAL_ORIGIN.x, transform.LOCAL_ORIGIN.y);
         sprite.setSize(transform.width, transform.height);
         sprite.setScale(1.5f);
@@ -512,6 +538,7 @@ public class GameObjects {
 
         item.name = "M4A1";
         item.maxStack = 1;
+        item.auto = true;
         item.handler = new ItemHandler() {
             @Override
             public String toString() {
@@ -542,7 +569,7 @@ public class GameObjects {
                     spawn.rotate(sourceTransform.rotation).scl(16).add(sourceTransform.WORLD_ORIGIN);
 
                     for (int i = 0; i < 1; i++)
-                        ENGINE.addEntity(GameObjects.createBullet(spawn.x, spawn.y, sourceTransform.rotation, 10, 5, ENGINE));
+                        engine.addEntity(GameObjects.createBullet(spawn.x, spawn.y, sourceTransform.rotation, 10, 5));
 
                     gun.magAmmo -= 1;
                     gun.gunTimer = 1 / gun.fireRate;
@@ -559,8 +586,8 @@ public class GameObjects {
                 TransformComponent sourceTransform = Mapper.TRANSFORM_MAPPER.get(source);
 
                 float
-                    x = sourceTransform.WORLD_ORIGIN.x + MathUtils.random(-sourceTransform.LOCAL_ORIGIN.x, sourceTransform.LOCAL_ORIGIN.x),
-                    y = sourceTransform.WORLD_ORIGIN.y + MathUtils.random(-sourceTransform.LOCAL_ORIGIN.y, sourceTransform.LOCAL_ORIGIN.y);
+                        x = sourceTransform.WORLD_ORIGIN.x + MathUtils.random(-sourceTransform.LOCAL_ORIGIN.x, sourceTransform.LOCAL_ORIGIN.x),
+                        y = sourceTransform.WORLD_ORIGIN.y + MathUtils.random(-sourceTransform.LOCAL_ORIGIN.y, sourceTransform.LOCAL_ORIGIN.y);
 
                 transform.POSITION.set(x, y);
                 item.dropped = true;
@@ -578,11 +605,10 @@ public class GameObjects {
      * @param x        the x-coordinate to spawn the gun at
      * @param y        the y-coordinate to spawn the gun at
      * @param lifeTime the amount of time before the item despawns (in seconds).
-     * @param ENGINE   the {@link Engine} to add this item to.
      * @return an item {@link Entity} with the proper {@link Component}s for a gun
      */
-    public static Entity createBenelli(float x, float y, float lifeTime, final Engine ENGINE) {
-        final Entity e = createItem(lifeTime, ENGINE);
+    public static Entity createBenelli(float x, float y, float lifeTime) {
+        final Entity e = createItem(lifeTime);
         final ItemComponent item = Mapper.ITEM_MAPPER.get(e);
         final TransformComponent transform = Mapper.TRANSFORM_MAPPER.get(e);
         final ColliderComponent collider = Mapper.COLLIDER_MAPPER.get(e);
@@ -594,8 +620,7 @@ public class GameObjects {
         transform.height = 15;
         transform.POSITION.set(x, y).sub(transform.LOCAL_ORIGIN);
 
-        Texture main = new Texture("shotgun.png");
-        Sprite sprite = new Sprite(main);
+        Sprite sprite = ((TextureAtlas) assets.MANAGER.get(Assets.GameObjects.ATLAS)).createSprite("shotgun");
         sprite.setOrigin(transform.LOCAL_ORIGIN.x, transform.LOCAL_ORIGIN.y);
         sprite.setSize(transform.width, transform.height);
         sprite.setScale(1.5f);
@@ -644,7 +669,7 @@ public class GameObjects {
                     spawn.rotate(sourceTransform.rotation).scl(16).add(sourceTransform.WORLD_ORIGIN);
 
                     for (int i = 0; i < 8; i++)
-                        ENGINE.addEntity(GameObjects.createBullet(spawn.x, spawn.y, sourceTransform.rotation, 30, 5, ENGINE));
+                        engine.addEntity(GameObjects.createBullet(spawn.x, spawn.y, sourceTransform.rotation, 30, 5));
 
                     gun.magAmmo -= 1;
                     gun.gunTimer = 1 / gun.fireRate;
@@ -671,6 +696,290 @@ public class GameObjects {
         e.add(gun);
 
         return e;
+    }
+
+    /**
+     * Creates an ammo box used to reload the first weapon in your inventory.
+     *
+     * @param x        the x-coordinate to spawn the gun at
+     * @param y        the y-coordinate to spawn the gun at
+     * @param lifeTime the amount of time before the item despawns (in seconds).
+     * @return an item {@link Entity} with the proper {@link Component}s for a gun
+     */
+    public static Entity createAmmoBox(float x, float y, float lifeTime) {
+        final Entity E = createItem(lifeTime);
+        final ItemComponent item = Mapper.ITEM_MAPPER.get(E);
+        final TransformComponent transform = Mapper.TRANSFORM_MAPPER.get(E);
+        final ColliderComponent collider = Mapper.COLLIDER_MAPPER.get(E);
+        final RenderComponent render = Mapper.RENDER_MAPPER.get(E);
+
+        transform.LOCAL_ORIGIN.set(16, 16);
+        transform.width = 32;
+        transform.height = 32;
+        transform.POSITION.set(x, y).sub(transform.LOCAL_ORIGIN);
+
+        Sprite sprite = ((TextureAtlas) assets.MANAGER.get(Assets.GameObjects.ATLAS)).createSprite("ammobox");
+        sprite.setSize(transform.width, transform.height);
+        sprite.setOrigin(transform.LOCAL_ORIGIN.x, transform.LOCAL_ORIGIN.y);
+        render.SPRITES.add(sprite);
+
+        collider.body = new Polygon(new float[]{
+                0, 0,
+                transform.width, 0,
+                transform.width, transform.height,
+                0, transform.height
+        });
+        collider.body.setOrigin(transform.LOCAL_ORIGIN.x, transform.LOCAL_ORIGIN.y);
+        collider.solid = false;
+
+        item.name = "Ammo Box";
+        item.maxStack = 40;
+        item.stack = MathUtils.random(1, item.maxStack);
+        item.handler = new ItemHandler() {
+            @Override
+            public String toString() {
+                return "" + item.stack + "/" + item.maxStack;
+            }
+
+            @Override
+            public void update(float dt) {
+
+            }
+
+            @Override
+            public void pickup(Entity source) {
+                Entity active = Mapper.INVENTORY_MAPPER.get(source).getActiveItem();
+
+                if (active != null && Mapper.GUN_MAPPER.has(active)) {
+                    GunComponent gun = Mapper.GUN_MAPPER.get(active);
+
+                    if (gun.ammo < gun.MAX_AMMO) {
+                        gun.ammo += item.stack;
+
+                        if (gun.ammo > gun.MAX_AMMO) {
+                            item.stack = gun.ammo - gun.MAX_AMMO;
+                            gun.ammo -= gun.ammo - gun.MAX_AMMO;
+                        } else {
+                            engine.removeEntity(E);
+                            return;
+                        }
+                    }
+                }
+            }
+
+            @Override
+            public void use(Entity source) {
+
+            }
+
+            @Override
+            public void useAlt(Entity source) {
+
+            }
+
+            @Override
+            public void drop(Entity source) {
+
+            }
+        };
+
+        return E;
+    }
+
+    /**
+     * Creates a bandage that can be used to heal the player by 10 HP.
+     *
+     * @param x        the x-coordinate to spawn the gun at
+     * @param y        the y-coordinate to spawn the gun at
+     * @param lifeTime the amount of time before the item despawns (in seconds).
+     * @return an item {@link Entity} with the proper {@link Component}s for a bandage
+     */
+    public static Entity createBandage(float x, float y, float lifeTime) {
+        final Entity E = createItem(lifeTime);
+        final ItemComponent item = Mapper.ITEM_MAPPER.get(E);
+        final TransformComponent transform = Mapper.TRANSFORM_MAPPER.get(E);
+        final ColliderComponent collider = Mapper.COLLIDER_MAPPER.get(E);
+        final RenderComponent render = Mapper.RENDER_MAPPER.get(E);
+
+        transform.width = 32;
+        transform.height = 16;
+        transform.LOCAL_ORIGIN.set(transform.width / 2, transform.height / 2);
+        transform.POSITION.set(x, y).sub(transform.LOCAL_ORIGIN);
+
+        Sprite sprite = ((TextureAtlas) assets.MANAGER.get(Assets.GameObjects.ATLAS)).createSprite("bandage");
+        sprite.setSize(transform.width, transform.height);
+        sprite.setOrigin(transform.LOCAL_ORIGIN.x, transform.LOCAL_ORIGIN.y);
+        render.SPRITES.add(sprite);
+
+        collider.body = new Polygon(new float[]{
+                0, 0,
+                transform.width, 0,
+                transform.width, transform.height,
+                0, transform.height
+        });
+        collider.body.setOrigin(transform.LOCAL_ORIGIN.x, transform.LOCAL_ORIGIN.y);
+        collider.solid = false;
+
+        item.name = "Bandage";
+        item.maxStack = 8;
+        item.stack = 1;
+        item.auto = false;
+        item.handler = new ItemHandler() {
+            @Override
+            public String toString() {
+                return "" + item.stack + "/" + item.maxStack;
+            }
+
+            @Override
+            public void update(float dt) {
+
+            }
+
+            @Override
+            public void pickup(Entity source) {
+                InventoryComponent inventory = Mapper.INVENTORY_MAPPER.get(source);
+                inventory.addByFill(E);
+                transform.POSITION.set(-999, -999);
+            }
+
+            @Override
+            public void use(Entity source) {
+                InventoryComponent inventory = Mapper.INVENTORY_MAPPER.get(source);
+
+                if (Mapper.HEALTH_MAPPER.has(source))
+                    Mapper.HEALTH_MAPPER.get(source).health += 10;
+
+                item.stack--;
+
+                if (item.stack == 0) {
+                    engine.removeEntity(E);
+
+                    for (int r = 0; r < inventory.STORAGE.length; r++) {
+                        for (int c = 0; c < inventory.STORAGE[r].length; c++) {
+                            if (inventory.STORAGE[r][c] == E) {
+                                inventory.STORAGE[r][c] = null;
+                            }
+                        }
+                    }
+                }
+            }
+
+            @Override
+            public void useAlt(Entity source) {
+
+            }
+
+            @Override
+            public void drop(Entity source) {
+                TransformComponent sourceTransform = Mapper.TRANSFORM_MAPPER.get(source);
+                float
+                        x = sourceTransform.WORLD_ORIGIN.x + MathUtils.random(-sourceTransform.LOCAL_ORIGIN.x, sourceTransform.LOCAL_ORIGIN.x),
+                        y = sourceTransform.WORLD_ORIGIN.y + MathUtils.random(-sourceTransform.LOCAL_ORIGIN.y, sourceTransform.LOCAL_ORIGIN.y);
+
+                transform.POSITION.set(x, y);
+                item.dropped = true;
+            }
+        };
+
+        return E;
+    }
+
+    /**
+     * Creates a dressing that can be used to heal the player by 20 HP.
+     *
+     * @param x        the x-coordinate to spawn the gun at
+     * @param y        the y-coordinate to spawn the gun at
+     * @param lifeTime the amount of time before the item despawns (in seconds).
+     * @return an item {@link Entity} with the proper {@link Component}s for a dressing
+     */
+    public static Entity createDressing(float x, float y, float lifeTime) {
+        final Entity E = createItem(lifeTime);
+        final ItemComponent item = Mapper.ITEM_MAPPER.get(E);
+        final TransformComponent transform = Mapper.TRANSFORM_MAPPER.get(E);
+        final ColliderComponent collider = Mapper.COLLIDER_MAPPER.get(E);
+        final RenderComponent render = Mapper.RENDER_MAPPER.get(E);
+
+        transform.width = 32;
+        transform.height = 32;
+        transform.LOCAL_ORIGIN.set(transform.width / 2, transform.height / 2);
+        transform.POSITION.set(x, y).sub(transform.LOCAL_ORIGIN);
+
+        Sprite sprite = ((TextureAtlas) assets.MANAGER.get(Assets.GameObjects.ATLAS)).createSprite("dressing");
+        sprite.setSize(transform.width, transform.height);
+        sprite.setOrigin(transform.LOCAL_ORIGIN.x, transform.LOCAL_ORIGIN.y);
+        render.SPRITES.add(sprite);
+
+        collider.body = new Polygon(new float[]{
+                0, 0,
+                transform.width, 0,
+                transform.width, transform.height,
+                0, transform.height
+        });
+        collider.body.setOrigin(transform.LOCAL_ORIGIN.x, transform.LOCAL_ORIGIN.y);
+        collider.solid = false;
+
+        item.name = "Dressing";
+        item.maxStack = 8;
+        item.stack = 1;
+        item.auto = false;
+        item.handler = new ItemHandler() {
+            @Override
+            public String toString() {
+                return "" + item.stack + "/" + item.maxStack;
+            }
+
+            @Override
+            public void update(float dt) {
+
+            }
+
+            @Override
+            public void pickup(Entity source) {
+                InventoryComponent inventory = Mapper.INVENTORY_MAPPER.get(source);
+                inventory.addByFill(E);
+                transform.POSITION.set(-999, -999);
+            }
+
+            @Override
+            public void use(Entity source) {
+                InventoryComponent inventory = Mapper.INVENTORY_MAPPER.get(source);
+
+                if (Mapper.HEALTH_MAPPER.has(source))
+                    Mapper.HEALTH_MAPPER.get(source).health += 20;
+
+                item.stack--;
+
+                if (item.stack == 0) {
+                    engine.removeEntity(E);
+
+                    for (int r = 0; r < inventory.STORAGE.length; r++) {
+                        for (int c = 0; c < inventory.STORAGE[r].length; c++) {
+                            if (inventory.STORAGE[r][c] == E) {
+                                inventory.STORAGE[r][c] = null;
+                            }
+                        }
+                    }
+                }
+            }
+
+            @Override
+            public void useAlt(Entity source) {
+
+            }
+
+            @Override
+            public void drop(Entity source) {
+                TransformComponent sourceTransform = Mapper.TRANSFORM_MAPPER.get(source);
+                float
+                        x = sourceTransform.WORLD_ORIGIN.x + MathUtils.random(-sourceTransform.LOCAL_ORIGIN.x, sourceTransform.LOCAL_ORIGIN.x),
+                        y = sourceTransform.WORLD_ORIGIN.y + MathUtils.random(-sourceTransform.LOCAL_ORIGIN.y, sourceTransform.LOCAL_ORIGIN.y);
+
+                transform.POSITION.set(x, y);
+                item.dropped = true;
+            }
+        };
+
+        return E;
     }
 
     /**
@@ -709,14 +1018,29 @@ public class GameObjects {
 
         for (MapObject o : spawners) {
             MapProperties properties = o.getProperties();
-            float x, y, w, h;
+            float
+                x,
+                y,
+                w,
+                h,
+                min = 120,
+                max = 180;
+            SpawnerType t = SpawnerType.ITEM;
 
             x = (Float) properties.get("x");
             y = (Float) properties.get("y");
             w = (Float) properties.get("width");
             h = (Float) properties.get("height");
 
-            mapEntities.add(createSpawner(x, y, w, h, SpawnerType.ZOMBIE));
+            try {
+                t = SpawnerType.valueOf(((String) properties.get("type")).toUpperCase());
+                min = Float.parseFloat((String) properties.get("minTime"));
+                max = Float.parseFloat((String) properties.get("maxTime"));
+            } catch (Exception e) {
+                Gdx.app.log("MAP", "ERROR: " + e.getMessage());
+            } finally {
+                mapEntities.add(createSpawner(x, y, w, h, min, max, t));
+            }
         }
 
         mapEntities.add(main);
@@ -727,18 +1051,20 @@ public class GameObjects {
     /**
      * Creates a spawner that spawns a certain group of {@link Entity}s.
      *
-     * @param x the x-coordinate of the spawner
-     * @param y the y-coordinate of the spawner
-     * @param w the width of the spawner
-     * @param h the height of the spawner
-     * @param t the {@link SpawnerType}
-     * @return an spawner {@link Entity} that spawns a set of {@link Entity}s
+     * @param x       the x-coordinate of the spawner
+     * @param y       the y-coordinate of the spawner
+     * @param w       the width of the spawner
+     * @param h       the height of the spawner
+     * @param t       the {@link SpawnerType}
+     * @param minTime the minimum time it will take for the spawner to spawn something
+     * @param maxTime the maximum time it will take for the spawner to spawn something
+     * @return a spawner {@link Entity} that spawns a set of {@link Entity}s
      *         in a defined region
      */
-    public static Entity createSpawner(float x, float y, float w, float h, SpawnerType t) {
+    public static Entity createSpawner(float x, float y, float w, float h, float minTime, float maxTime, SpawnerType t) {
         final Entity e = new Entity();
         TransformComponent transform = new TransformComponent(x, y);
-        SpawnerComponent spawner = new SpawnerComponent(2, 5, t);
+        SpawnerComponent spawner = new SpawnerComponent(minTime, maxTime, t);
 
         transform.width = w;
         transform.height = h;

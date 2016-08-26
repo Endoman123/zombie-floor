@@ -13,7 +13,7 @@ public class PlayerComponent implements Component {
             burnRate,
             regenRate,
             restTimer,
-            restRate;
+            restLength;
 
     public PlayerComponent() {
         walkSpeed = 100f;
@@ -22,7 +22,7 @@ public class PlayerComponent implements Component {
         regenRate = 15f;
 
         stamina = 100;
-        restRate = 10f;
+        restLength = 3f;
         restTimer = -1;
     }
 }

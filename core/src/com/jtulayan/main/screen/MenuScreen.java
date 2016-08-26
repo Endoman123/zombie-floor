@@ -31,7 +31,7 @@ public class MenuScreen extends ScreenAdapter {
         stage = new Stage(PARENT.getViewport(), PARENT.getBatch());
         Gdx.input.setInputProcessor(stage);
 
-        final Skin SKIN = ASSETS.MANAGER.get(Assets.UI.SKIN, Skin.class);
+        final Skin SKIN = ((Skin) ASSETS.MANAGER.get(Assets.UI.SKIN));
         final Table TABLE = new Table();
 
         final Pixmap BG_CANVAS = new Pixmap(1, 1, Pixmap.Format.RGBA8888);

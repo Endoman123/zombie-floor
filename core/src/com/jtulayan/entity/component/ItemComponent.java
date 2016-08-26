@@ -12,7 +12,7 @@ import com.jtulayan.handler.ItemHandler;
  */
 public class ItemComponent implements Component {
     public int maxStack, stack;
-    public boolean dropped;
+    public boolean dropped, auto;
     public String name;
     public ItemHandler handler;
 
@@ -20,6 +20,7 @@ public class ItemComponent implements Component {
         maxStack = 1;
         stack = 1;
         dropped = true;
+        auto = false;
     }
 
     public ItemComponent(int s, int ms, String n, ItemHandler cb) {
@@ -30,6 +31,7 @@ public class ItemComponent implements Component {
         maxStack = ms;
         name = n;
         handler = cb;
+        auto = false;
     }
 
     public String toString() {

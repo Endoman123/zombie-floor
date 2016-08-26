@@ -1,0 +1,117 @@
+
+gameobjects.png
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+badlogic
+  rotate: false
+  xy: 1, 196
+  size: 256, 256
+  orig: 256, 256
+  offset: 0, 0
+  index: -1
+slash
+  rotate: false
+  xy: 1, 66
+  size: 128, 128
+  orig: 128, 128
+  offset: 0, 0
+  index: -1
+player
+  rotate: false
+  xy: 259, 420
+  size: 64, 32
+  orig: 64, 32
+  offset: 0, 0
+  index: -1
+zombie
+  rotate: false
+  xy: 1, 32
+  size: 64, 32
+  orig: 64, 32
+  offset: 0, 0
+  index: -1
+chainsaw
+  rotate: false
+  xy: 131, 170
+  size: 64, 24
+  orig: 64, 24
+  offset: 0, 0
+  index: -1
+sword
+  rotate: false
+  xy: 259, 402
+  size: 64, 16
+  orig: 64, 16
+  offset: 0, 0
+  index: -1
+lightsaber
+  rotate: false
+  xy: 325, 448
+  size: 64, 4
+  orig: 64, 4
+  offset: 0, 0
+  index: -1
+rifle
+  rotate: false
+  xy: 1, 15
+  size: 46, 15
+  orig: 46, 15
+  offset: 0, 0
+  index: -1
+sniperrifle
+  rotate: false
+  xy: 67, 53
+  size: 46, 11
+  orig: 46, 11
+  offset: 0, 0
+  index: -1
+shotgun
+  rotate: false
+  xy: 131, 159
+  size: 45, 9
+  orig: 45, 9
+  offset: 0, 0
+  index: -1
+ammobox
+  rotate: false
+  xy: 197, 170
+  size: 24, 24
+  orig: 24, 24
+  offset: 0, 0
+  index: -1
+bullet
+  rotate: false
+  xy: 259, 392
+  size: 32, 8
+  orig: 32, 8
+  offset: 0, 0
+  index: -1
+pistol
+  rotate: false
+  xy: 325, 429
+  size: 21, 17
+  orig: 21, 17
+  offset: 0, 0
+  index: -1
+bandage
+  rotate: false
+  xy: 1, 1
+  size: 24, 12
+  orig: 24, 12
+  offset: 0, 0
+  index: -1
+dressing
+  rotate: false
+  xy: 67, 35
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: -1
+knife
+  rotate: false
+  xy: 131, 151
+  size: 24, 6
+  orig: 24, 6
+  offset: 0, 0
+  index: -1

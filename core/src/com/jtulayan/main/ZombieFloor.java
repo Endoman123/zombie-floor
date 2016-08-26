@@ -4,10 +4,9 @@ import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.graphics.g2d.TextureAtlas;
-import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
+import com.jtulayan.entity.GameObjects;
 import com.jtulayan.main.screen.MenuScreen;
 
 /**
@@ -25,9 +24,12 @@ public class ZombieFloor extends Game {
         viewport.update(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
 
         assets = new Assets();
-        assets.MANAGER.load(Assets.UI.ATLAS, TextureAtlas.class);
-        assets.MANAGER.load(Assets.UI.SKIN, Skin.class);
-        assets.MANAGER.load(Assets.HUD.ATLAS, TextureAtlas.class);
+        assets.MANAGER.load(Assets.UI.ATLAS);
+        assets.MANAGER.load(Assets.UI.SKIN);
+        assets.MANAGER.load(Assets.HUD.ATLAS);
+        assets.MANAGER.load(Assets.GameObjects.ATLAS);
+
+        GameObjects.setAssets(assets);
 
         while (!assets.MANAGER.update()) {
             Gdx.app.log("ASSETS", "Loading: " + (assets.MANAGER.getProgress() * 100));

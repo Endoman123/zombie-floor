@@ -87,9 +87,9 @@ public class PlayerSystem extends IteratingSystem {
         } else {
             if (player.stamina < 100) {
                 if (player.restTimer == -1)
-                    player.restTimer = 100;
+                    player.restTimer = player.restLength;
                 else if (player.restTimer > 0)
-                    player.restTimer -= deltaTime * player.restRate;
+                    player.restTimer -= deltaTime;
                 else if (player.restTimer <= 0)
                     player.stamina += deltaTime * player.regenRate;
             }
@@ -97,18 +97,24 @@ public class PlayerSystem extends IteratingSystem {
             movement.translationSpeed = player.walkSpeed;
         }
 
+        if (Gdx.input.isButtonPressed(Input.Buttons.LEFT)) {
+            if (inventory.getActiveItem() != null) {
+                ItemComponent item = Mapper.ITEM_MAPPER.get(inventory.getActiveItem());
 
-        if (Gdx.input.isButtonPressed(Input.Buttons.LEFT))
-            inventory.use();
+                if (item.auto || !item.auto && Gdx.input.justTouched())
+                    inventory.use();
+            }
+        }
 
         if (Gdx.input.isButtonPressed(Input.Buttons.RIGHT))
             inventory.useAlt();
 
-        if (Gdx.input.isKeyJustPressed(Input.Keys.E)) {
-            Entity[] collidingWith = collider.collidingWith.toArray(Entity.class);
-            for (Entity e : collidingWith) {
-                if (Mapper.ITEM_MAPPER.has(e))
-                Mapper.ITEM_MAPPER.get(e).handler.pickup(entity);
+        for (Entity e : collider.collidingWith) {
+            if (Mapper.ITEM_MAPPER.has(e)) {
+                ItemComponent item = Mapper.ITEM_MAPPER.get(e);
+
+                if (Gdx.input.isKeyJustPressed(Input.Keys.E))
+                    Mapper.ITEM_MAPPER.get(e).handler.pickup(entity);
             }
         }
 

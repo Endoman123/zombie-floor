@@ -1,19 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" orientation="orthogonal" renderorder="right-down" width="32" height="32" tilewidth="64" tileheight="64" nextobjectid="286">
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="32" height="32" tilewidth="64" tileheight="64" nextobjectid="292">
  <tileset firstgid="1" name="tileset" tilewidth="64" tileheight="64" tilecount="48" columns="12">
-  <image source="tileset.png" trans="ff00ff" width="768" height="256"/>
+  <image source="textures/tileset.png" trans="ff00ff" width="768" height="256"/>
  </tileset>
  <tileset firstgid="49" name="floortiles" tilewidth="64" tileheight="64" tilecount="4" columns="2">
-  <image source="floortiles.jpg" trans="ff00ff" width="128" height="128"/>
+  <image source="textures/floortiles.jpg" trans="ff00ff" width="128" height="128"/>
  </tileset>
  <tileset firstgid="53" name="bloodtiles" tilewidth="128" tileheight="128" tilecount="4" columns="2">
-  <image source="bloodtiles.png" trans="ff00ff" width="256" height="256"/>
+  <image source="textures/bloodtiles.png" trans="ff00ff" width="256" height="256"/>
  </tileset>
  <tileset firstgid="57" name="dirttiles" tilewidth="128" tileheight="128" tilecount="4" columns="2">
-  <image source="dirttiles.png" trans="ff00ff" width="256" height="256"/>
+  <image source="textures/dirttiles.png" trans="ff00ff" width="256" height="256"/>
  </tileset>
  <tileset firstgid="61" name="scratchtiles" tilewidth="128" tileheight="128" tilecount="4" columns="2">
-  <image source="scratchtiles.png" trans="ff00ff" width="256" height="256"/>
+  <image source="textures/scratchtiles.png" trans="ff00ff" width="256" height="256"/>
  </tileset>
  <layer name="Floor" width="32" height="32" opacity="0.8">
   <data encoding="csv">
@@ -459,21 +459,137 @@
   </object>
  </objectgroup>
  <objectgroup name="Spawners">
-  <object id="268" x="200" y="968" width="561" height="370"/>
-  <object id="270" x="202" y="1350" width="174" height="309"/>
-  <object id="271" x="389" y="1480" width="307" height="113"/>
-  <object id="272" x="773" y="1477" width="245" height="117"/>
-  <object id="273" x="772" y="1796" width="245" height="183"/>
-  <object id="274" x="1349" y="1669" width="566" height="308"/>
-  <object id="275" x="837" y="709" width="117" height="695"/>
-  <object id="276" x="962" y="1285" width="504" height="119"/>
-  <object id="277" x="1348" y="709" width="117" height="569"/>
-  <object id="278" x="963" y="710" width="376" height="180"/>
-  <object id="279" x="197" y="516" width="181" height="437"/>
-  <object id="280" x="69" y="70" width="115" height="437"/>
-  <object id="281" x="194" y="390" width="442" height="116"/>
-  <object id="283" x="516" y="68" width="118" height="312"/>
-  <object id="284" x="195" y="69" width="315" height="116"/>
-  <object id="285" x="1861" y="710" width="117" height="179"/>
+  <object id="268" name="ZombieSpawner" type="Zombie" x="200" y="968" width="561" height="370">
+   <properties>
+    <property name="maxTime" type="float" value="5"/>
+    <property name="minTime" type="float" value="2"/>
+   </properties>
+  </object>
+  <object id="270" name="ZombieSpawner" type="Zombie" x="202" y="1350" width="174" height="309">
+   <properties>
+    <property name="maxTime" type="float" value="5"/>
+    <property name="minTime" type="float" value="2"/>
+   </properties>
+  </object>
+  <object id="271" name="ZombieSpawner" type="Zombie" x="389" y="1480" width="307" height="113">
+   <properties>
+    <property name="maxTime" type="float" value="5"/>
+    <property name="minTime" type="float" value="2"/>
+   </properties>
+  </object>
+  <object id="272" name="ZombieSpawner" type="Zombie" x="773" y="1477" width="245" height="117">
+   <properties>
+    <property name="maxTime" type="float" value="5"/>
+    <property name="minTime" type="float" value="2"/>
+   </properties>
+  </object>
+  <object id="273" name="ZombieSpawner" type="Zombie" x="772" y="1796" width="245" height="183">
+   <properties>
+    <property name="maxTime" type="float" value="5"/>
+    <property name="minTime" type="float" value="2"/>
+   </properties>
+  </object>
+  <object id="274" name="ZombieSpawner" type="Zombie" x="1349" y="1669" width="566" height="308">
+   <properties>
+    <property name="maxTime" type="float" value="5"/>
+    <property name="minTime" type="float" value="2"/>
+   </properties>
+  </object>
+  <object id="275" name="ZombieSpawner" type="Zombie" x="837" y="709" width="117" height="695">
+   <properties>
+    <property name="maxTime" type="float" value="5"/>
+    <property name="minTime" type="float" value="2"/>
+   </properties>
+  </object>
+  <object id="276" name="ZombieSpawner" type="Zombie" x="962" y="1285" width="504" height="119">
+   <properties>
+    <property name="maxTime" type="float" value="5"/>
+    <property name="minTime" type="float" value="2"/>
+   </properties>
+  </object>
+  <object id="277" name="ZombieSpawner" type="Zombie" x="1348" y="709" width="117" height="569">
+   <properties>
+    <property name="maxTime" type="float" value="5"/>
+    <property name="minTime" type="float" value="2"/>
+   </properties>
+  </object>
+  <object id="278" name="ZombieSpawner" type="Zombie" x="963" y="710" width="376" height="180">
+   <properties>
+    <property name="maxTime" type="float" value="5"/>
+    <property name="minTime" type="float" value="2"/>
+   </properties>
+  </object>
+  <object id="279" name="ZombieSpawner" type="Zombie" x="197" y="516" width="181" height="437">
+   <properties>
+    <property name="maxTime" type="float" value="5"/>
+    <property name="minTime" type="float" value="2"/>
+   </properties>
+  </object>
+  <object id="280" name="ZombieSpawner" type="Zombie" x="69" y="70" width="115" height="437">
+   <properties>
+    <property name="maxTime" type="float" value="5"/>
+    <property name="minTime" type="float" value="2"/>
+   </properties>
+  </object>
+  <object id="281" name="ZombieSpawner" type="Zombie" x="194" y="390" width="442" height="116">
+   <properties>
+    <property name="maxTime" type="float" value="5"/>
+    <property name="minTime" type="float" value="2"/>
+   </properties>
+  </object>
+  <object id="283" name="ZombieSpawner" type="Zombie" x="516" y="68" width="118" height="312">
+   <properties>
+    <property name="maxTime" type="float" value="5"/>
+    <property name="minTime" type="float" value="2"/>
+   </properties>
+  </object>
+  <object id="284" name="ZombieSpawner" type="Zombie" x="195" y="69" width="315" height="116">
+   <properties>
+    <property name="maxTime" type="float" value="5"/>
+    <property name="minTime" type="float" value="2"/>
+   </properties>
+  </object>
+  <object id="285" name="ZombieSpawner" type="Zombie" x="1861" y="710" width="117" height="179">
+   <properties>
+    <property name="maxTime" type="float" value="5"/>
+    <property name="minTime" type="float" value="2"/>
+   </properties>
+  </object>
+  <object id="286" name="ItemSpawner" type="Item" x="644" y="1605" width="56" height="118">
+   <properties>
+    <property name="maxTime" type="float" value="180"/>
+    <property name="minTime" type="float" value="120"/>
+   </properties>
+  </object>
+  <object id="287" name="ItemSpawner" type="Item" x="836" y="1604" width="56" height="119">
+   <properties>
+    <property name="maxTime" type="float" value="180"/>
+    <property name="minTime" type="float" value="120"/>
+   </properties>
+  </object>
+  <object id="288" name="ItemSpawner" type="Item" x="581" y="1800" width="183" height="177">
+   <properties>
+    <property name="maxTime" type="float" value="180"/>
+    <property name="minTime" type="float" value="120"/>
+   </properties>
+  </object>
+  <object id="289" name="ItemSpawner" type="Item" x="1922" y="1670" width="59" height="308">
+   <properties>
+    <property name="maxTime" type="float" value="180"/>
+    <property name="minTime" type="float" value="120"/>
+   </properties>
+  </object>
+  <object id="290" name="ItemSpawner" type="Item" x="1029" y="966" width="244" height="245">
+   <properties>
+    <property name="maxTime" type="float" value="180"/>
+    <property name="minTime" type="float" value="120"/>
+   </properties>
+  </object>
+  <object id="291" name="ItemSpawner" type="Item" x="327" y="198" width="50" height="179">
+   <properties>
+    <property name="maxTime" type="float" value="180"/>
+    <property name="minTime" type="float" value="120"/>
+   </properties>
+  </object>
  </objectgroup>
 </map>
