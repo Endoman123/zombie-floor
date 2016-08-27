@@ -40,10 +40,10 @@ public class MovementSystem extends IteratingSystem {
             transform.rotation += movement.rotationSpeed * deltaTime;
         }
 
-        // Keep rotation between 0 and 360
+        // Keep rotation between 0 and 359
         if (transform.rotation > 360)
             transform.rotation -= 360;
-        if (transform.rotation < 0)
+        if (transform.rotation <= 0)
             transform.rotation += 360;
 
         // Modify WORLD_ORIGIN to be located where the transform's LOCAL_ORIGIN is in world coordinates

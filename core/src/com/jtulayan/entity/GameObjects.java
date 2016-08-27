@@ -298,15 +298,20 @@ public class GameObjects {
         collider.body.setOrigin(12, 12);
         collider.handler = new CollisionHandler() {
             @Override
-            public void updateCollision(Entity e2, Intersector.MinimumTranslationVector m, boolean solid) {
+            public void updateCollision(Entity e, Intersector.MinimumTranslationVector m, boolean solid) {
                 if (solid) {
                     Vector2 mtv = m.normal.scl(m.depth);
 
                     transform.POSITION.add(mtv);
-
-                    if (ai.state == AIStates.WANDER)
-                        ai.randomTimer = 0;
                 }
+            }
+
+            @Override
+            public void enterCollision(Entity e2, Intersector.MinimumTranslationVector m, boolean solid) {
+                    if (ai.state == AIStates.WANDER) {
+                        ai.targetDirection = MathUtils.random(135, 225);
+                        ai.randomTimer = (float)Math.random();
+                    }
             }
         };
 
