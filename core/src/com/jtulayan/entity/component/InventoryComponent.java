@@ -34,8 +34,11 @@ public class InventoryComponent implements Component {
      * If able to, picks up item currently standing over and adds it to storage.
      */
     public void pickup(Entity e) {
-            addByFill(e);
-            Mapper.ITEM_MAPPER.get(e).handler.pickup(owner);
+            if (addByFill(e)) {
+                TransformComponent transform = Mapper.TRANSFORM_MAPPER.get(e);
+
+                transform.POSITION.set(-999, -999);
+            }
     }
 
     /**
@@ -55,13 +58,24 @@ public class InventoryComponent implements Component {
     }
 
     /**
-     * Updates current item.
+     * Updates the inventory.
      *
      * @param dt the time in between calls
      */
     public void update(float dt) {
         if (getActiveItem() != null)
             Mapper.ITEM_MAPPER.get(getActiveItem()).handler.update(dt);
+
+        for (int r = 0; r < STORAGE.length; r++) {
+            for (int c = 0; c < STORAGE[r].length; c++) {
+                if (STORAGE[r][c] != null) {
+                    ItemComponent item = Mapper.ITEM_MAPPER.get(STORAGE[r][c]);
+
+                    if (item.stack == 0)
+                        STORAGE[r][c] = null;
+                }
+            }
+        }
     }
 
     /**

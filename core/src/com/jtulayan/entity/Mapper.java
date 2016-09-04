@@ -21,7 +21,8 @@ public class Mapper {
     public static final ComponentMapper<DamageComponent> DAMAGE_MAPPER;
     public static final ComponentMapper<ItemComponent> ITEM_MAPPER;
     public static final ComponentMapper<InventoryComponent> INVENTORY_MAPPER;
-    public static final ComponentMapper<GunComponent> GUN_MAPPER;
+    public static final ComponentMapper<WeaponComponent> WEAPON_MAPPER;
+    public static final ComponentMapper<AmmoComponent> AMMO_MAPPER;
     public static final ComponentMapper<MapComponent> MAP_MAPPER;
     public static final ComponentMapper<InputComponent> INPUT_MAPPER;
     public static final ComponentMapper<CanvasComponent> CANVAS_MAPPER;
@@ -38,7 +39,8 @@ public class Mapper {
         DAMAGE_MAPPER = ComponentMapper.getFor(DamageComponent.class);
         ITEM_MAPPER = ComponentMapper.getFor(ItemComponent.class);
         INVENTORY_MAPPER = ComponentMapper.getFor(InventoryComponent.class);
-        GUN_MAPPER = ComponentMapper.getFor(GunComponent.class);
+        WEAPON_MAPPER = ComponentMapper.getFor(WeaponComponent.class);
+        AMMO_MAPPER = ComponentMapper.getFor(AmmoComponent.class);
         MAP_MAPPER = ComponentMapper.getFor(MapComponent.class);
         INPUT_MAPPER = ComponentMapper.getFor(InputComponent.class);
         CANVAS_MAPPER = ComponentMapper.getFor(CanvasComponent.class);

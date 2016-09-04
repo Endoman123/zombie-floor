@@ -33,11 +33,3 @@ bar
   orig: 32, 32
   offset: 0, 0
   index: -1
-staminabar
-  rotate: false
-  xy: 437, 83
-  size: 32, 32
-  split: 0, 0, 0, 0
-  orig: 32, 32
-  offset: 0, 0
-  index: -1

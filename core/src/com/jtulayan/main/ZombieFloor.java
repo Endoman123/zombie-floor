@@ -29,7 +29,7 @@ public class ZombieFloor extends Game {
         assets.MANAGER.load(Assets.HUD.ATLAS);
         assets.MANAGER.load(Assets.GameObjects.ATLAS);
 
-        GameObjects.setAssets(assets);
+        GameObjects.initGame(this);
 
         while (!assets.MANAGER.update()) {
             Gdx.app.log("ASSETS", "Loading: " + (assets.MANAGER.getProgress() * 100));
@@ -45,12 +45,6 @@ public class ZombieFloor extends Game {
 
         if (getScreen() != null)
             getScreen().render(Math.min(Gdx.graphics.getDeltaTime(), 1 / 60f));
-    }
-
-    @Override
-    public void resize(int width, int height) {
-        super.resize(width, height);
-        viewport.update(width, height, true);
     }
 
     @Override

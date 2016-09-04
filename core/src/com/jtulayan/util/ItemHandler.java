@@ -1,4 +1,4 @@
-package com.jtulayan.handler;
+package com.jtulayan.util;
 
 import com.badlogic.ashley.core.Entity;
 

@@ -12,6 +12,9 @@ import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.utils.Scaling;
 import com.jtulayan.main.Assets;
 import com.jtulayan.main.ZombieFloor;
+import com.kotcrab.vis.ui.VisUI;
+import com.kotcrab.vis.ui.widget.VisTable;
+import com.kotcrab.vis.ui.widget.VisTextButton;
 
 /**
  * @author Jared Tulayan
@@ -31,8 +34,17 @@ public class MenuScreen extends ScreenAdapter {
         stage = new Stage(PARENT.getViewport(), PARENT.getBatch());
         Gdx.input.setInputProcessor(stage);
 
+        VisUI.load();
+
+        final VisTable TABLE = new VisTable();
+
+        final VisTextButton
+                START = new VisTextButton("Start"),
+                OPTIONS = new VisTextButton("Options"),
+                QUIT = new VisTextButton("Quit");
+
         final Skin SKIN = ((Skin) ASSETS.MANAGER.get(Assets.UI.SKIN));
-        final Table TABLE = new Table();
+       /* final Table TABLE = new Table();*/
 
         final Pixmap BG_CANVAS = new Pixmap(1, 1, Pixmap.Format.RGBA8888);
 
@@ -43,10 +55,10 @@ public class MenuScreen extends ScreenAdapter {
         final Image BG = new Image(SKIN.newDrawable("canvas", Color.MAGENTA)),
                     TITLE = new Image(SKIN.getDrawable("title"));
 
-        final TextButton
+/*        final TextButton
                 START = new TextButton("Start", SKIN, "toggle"),
                 OPTIONS = new TextButton("Options", SKIN, "toggle"),
-                EXIT = new TextButton("Exit", SKIN, "toggle");
+                EXIT = new TextButton("Exit", SKIN, "toggle");*/
 
         final ChangeListener LISTENER = new ChangeListener() {
             @Override
@@ -56,7 +68,7 @@ public class MenuScreen extends ScreenAdapter {
                         PARENT.setScreen(new GameScreen(PARENT));
                     else if (actor == OPTIONS)
                         PARENT.setScreen(new MenuScreen(PARENT));
-                    else if (actor == EXIT)
+                    else if (actor == QUIT)
                         Gdx.app.exit();
                 }
             }
@@ -65,13 +77,13 @@ public class MenuScreen extends ScreenAdapter {
         TITLE.setScaling(Scaling.fit);
         START.addListener(LISTENER);
         OPTIONS.addListener(LISTENER);
-        EXIT.addListener(LISTENER);
+        QUIT.addListener(LISTENER);
 
         TABLE.center().pad(20).setFillParent(true);
         TABLE.add(TITLE).pad(20).row();
         TABLE.add(START).pad(10).size(100, 32).row();
         TABLE.add(OPTIONS).pad(10).size(100, 32).row();
-        TABLE.add(EXIT).pad(10).size(100, 32);
+        TABLE.add(QUIT).pad(10).size(100, 32);
 
         BG.setFillParent(true);
         stage.addActor(BG);

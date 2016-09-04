@@ -1,90 +1,96 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" orientation="orthogonal" renderorder="right-down" width="32" height="32" tilewidth="64" tileheight="64" nextobjectid="292">
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="32" height="32" tilewidth="64" tileheight="64" nextobjectid="294">
  <tileset firstgid="1" name="tileset" tilewidth="64" tileheight="64" tilecount="48" columns="12">
-  <image source="textures/tileset.png" trans="ff00ff" width="768" height="256"/>
+  <image source="textures/walltiles.jpg" trans="ff00ff" width="768" height="256"/>
  </tileset>
- <tileset firstgid="49" name="floortiles" tilewidth="64" tileheight="64" tilecount="4" columns="2">
-  <image source="textures/floortiles.jpg" trans="ff00ff" width="128" height="128"/>
- </tileset>
- <tileset firstgid="53" name="bloodtiles" tilewidth="128" tileheight="128" tilecount="4" columns="2">
+ <tileset firstgid="49" name="bloodtiles" tilewidth="128" tileheight="128" tilecount="4" columns="2">
   <image source="textures/bloodtiles.png" trans="ff00ff" width="256" height="256"/>
  </tileset>
- <tileset firstgid="57" name="dirttiles" tilewidth="128" tileheight="128" tilecount="4" columns="2">
+ <tileset firstgid="53" name="dirttiles" tilewidth="128" tileheight="128" tilecount="4" columns="2">
   <image source="textures/dirttiles.png" trans="ff00ff" width="256" height="256"/>
  </tileset>
- <tileset firstgid="61" name="scratchtiles" tilewidth="128" tileheight="128" tilecount="4" columns="2">
+ <tileset firstgid="57" name="scratchtiles" tilewidth="128" tileheight="128" tilecount="4" columns="2">
   <image source="textures/scratchtiles.png" trans="ff00ff" width="256" height="256"/>
  </tileset>
- <layer name="Floor" width="32" height="32" opacity="0.8">
-  <data encoding="csv">
-49,49,49,49,49,49,49,49,49,49,49,49,49,49,49,49,49,49,49,49,49,49,49,49,49,49,49,49,49,49,49,49,
-49,51,51,51,51,51,51,51,51,51,49,49,52,52,52,49,49,49,49,49,49,49,49,49,50,50,50,50,50,50,50,49,
-49,51,51,51,51,51,51,51,51,51,49,49,52,52,52,49,49,49,49,49,49,49,49,49,50,50,50,50,50,50,50,49,
-49,51,51,51,51,51,51,51,51,51,49,49,52,49,52,49,52,52,52,49,49,49,49,49,50,50,50,50,50,50,50,49,
-49,51,51,51,51,51,51,51,51,51,49,52,52,49,52,49,52,52,52,49,52,52,52,49,50,50,50,50,50,50,50,49,
-49,51,51,51,51,51,51,51,51,51,52,52,52,49,52,52,52,49,52,49,52,52,52,49,50,50,50,50,50,50,50,49,
-49,51,51,51,51,51,51,51,51,51,49,49,49,49,52,52,52,49,52,52,52,49,52,49,49,49,49,49,49,49,49,49,
-49,51,51,51,51,51,51,51,51,51,49,49,49,49,49,49,49,49,52,52,52,49,52,52,52,52,49,49,49,49,49,49,
-49,49,49,49,49,49,49,49,49,49,49,49,49,49,49,49,49,49,49,49,49,49,49,49,49,52,49,49,49,49,49,49,
-49,49,49,49,49,49,49,49,49,49,49,49,49,49,49,49,49,49,49,49,49,49,49,49,49,52,49,49,49,49,49,49,
-49,49,49,49,49,49,49,49,49,49,49,49,49,49,49,49,49,49,49,49,49,49,49,49,49,52,49,49,49,49,49,49,
-49,49,49,49,49,49,52,49,49,49,49,49,52,51,51,51,51,51,51,51,51,51,51,49,49,52,49,49,49,49,49,49,
-49,49,49,49,49,49,52,52,52,52,52,52,52,51,51,51,51,51,51,51,51,51,51,49,49,52,49,49,49,49,49,49,
-49,49,49,49,49,49,52,52,52,52,52,52,52,51,51,51,51,51,51,51,51,51,51,49,49,52,49,49,49,49,49,49,
-49,49,49,49,49,49,52,49,49,49,49,49,52,51,51,51,51,51,51,51,51,51,51,49,49,52,49,49,49,49,49,49,
-49,49,49,49,49,49,49,49,49,49,49,49,49,51,51,51,50,50,50,50,51,51,51,49,49,52,49,49,49,49,49,49,
-49,49,49,49,49,49,49,49,49,49,49,49,49,51,51,50,50,50,50,50,51,51,51,49,49,52,52,52,49,49,49,49,
-49,49,49,49,49,49,49,49,49,49,49,49,49,51,51,50,50,50,50,50,51,51,51,49,49,52,52,52,49,49,49,49,
-49,49,49,49,49,49,49,49,49,49,49,49,49,51,51,50,50,50,50,50,51,51,51,49,49,52,52,52,49,49,49,49,
-49,49,49,49,49,49,49,49,49,49,49,49,49,51,51,51,51,51,51,51,51,51,51,51,49,49,49,49,49,49,49,49,
-49,49,49,49,49,49,49,49,49,49,49,49,49,51,51,51,51,51,51,51,51,51,51,51,51,51,51,49,49,49,49,49,
-49,49,49,49,49,49,49,49,49,49,49,49,49,51,51,51,51,51,51,51,51,51,51,51,51,51,51,49,49,49,49,49,
-49,49,49,49,49,49,49,49,49,49,49,49,49,49,49,49,49,49,49,49,49,49,49,49,49,49,49,49,49,49,49,49,
-49,49,49,49,49,49,49,49,49,49,49,49,49,49,49,49,49,49,49,49,49,49,49,49,49,49,49,49,49,49,49,49,
-49,49,49,49,49,49,49,49,49,49,49,49,49,49,49,49,49,49,49,49,49,49,49,49,49,49,49,49,49,49,49,49,
-49,49,49,49,49,49,49,49,49,49,49,49,49,49,49,49,49,49,49,49,49,49,49,49,49,49,49,49,49,49,49,49,
-49,49,49,50,50,50,49,49,49,49,49,49,49,49,0,49,49,49,49,49,49,52,52,52,52,52,52,52,52,52,52,49,
-49,50,50,50,50,50,50,50,49,49,49,49,49,49,49,49,49,49,49,49,49,52,52,52,52,52,52,52,52,52,52,49,
-49,50,50,50,50,50,50,50,49,52,52,52,52,52,52,52,52,49,49,49,52,52,52,52,52,52,52,52,52,52,52,49,
-49,50,50,50,50,50,50,50,49,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,49,
-49,50,50,50,50,50,50,50,49,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,49,
-49,49,49,49,49,49,49,49,49,49,49,49,49,49,49,49,49,49,49,49,49,49,49,49,49,49,49,49,49,49,49,49
-</data>
- </layer>
- <layer name="Grime" width="32" height="32" opacity="0.8">
+ <tileset firstgid="61" name="metaltiles" tilewidth="64" tileheight="64" tilecount="4" columns="2">
+  <image source="textures/metaltiles1.jpg" trans="ff00ff" width="128" height="128"/>
+ </tileset>
+ <tileset firstgid="65" name="metaltiles2" tilewidth="64" tileheight="64" tilecount="4" columns="2">
+  <image source="textures/metaltiles2.jpg" trans="ff00ff" width="128" height="128"/>
+ </tileset>
+ <tileset firstgid="69" name="marbletiles" tilewidth="64" tileheight="64" tilecount="4" columns="2">
+  <image source="textures/marbletiles.jpg" trans="ff00ff" width="128" height="128"/>
+ </tileset>
+ <layer name="Floor" width="32" height="32">
   <data encoding="csv">
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,59,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,53,53,59,0,0,0,57,60,0,
-0,0,0,0,0,0,0,0,0,0,0,0,55,54,0,0,0,0,0,0,0,0,0,53,59,55,0,0,0,0,58,0,
-0,0,55,0,60,57,0,54,0,0,0,0,0,60,0,55,54,0,57,0,0,0,0,61,55,0,0,0,64,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,58,0,0,59,56,0,0,57,0,56,58,0,62,0,0,0,0,0,0,0,0,
-58,0,60,55,55,0,0,0,0,0,57,0,59,60,0,0,60,0,0,56,0,0,0,0,0,0,0,0,0,0,53,0,
-0,59,0,0,54,0,0,0,0,0,0,0,0,59,0,0,60,0,0,0,0,0,0,0,0,59,58,0,64,54,55,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,60,59,0,0,55,0,0,58,60,0,0,0,60,0,0,62,61,0,0,
-55,0,0,0,0,0,0,55,0,0,0,0,0,0,0,0,0,0,56,0,0,0,59,0,60,0,0,0,0,0,0,0,
-0,0,55,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,59,0,0,
-0,0,55,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,58,0,53,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,55,0,0,0,0,0,0,54,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,57,59,0,0,0,0,0,0,64,0,0,0,60,0,0,0,0,61,0,0,0,0,0,0,0,0,53,0,
-0,0,0,59,0,0,0,0,55,54,0,0,63,0,0,0,0,59,0,0,0,63,0,0,0,53,0,0,59,0,0,0,
-0,0,0,0,60,58,0,0,55,55,0,0,63,0,58,57,0,0,0,0,54,0,0,0,0,0,0,0,58,0,60,0,
-0,0,0,0,0,0,0,0,0,0,0,59,0,60,0,60,58,0,0,0,0,0,0,0,0,0,58,0,0,0,0,0,
-0,0,63,0,0,0,0,0,60,58,59,0,0,0,53,59,0,0,0,54,0,0,0,0,0,0,58,0,64,0,0,0,
-0,0,61,0,56,53,0,0,59,60,57,0,0,0,63,64,0,0,0,55,0,59,0,0,0,56,0,0,0,0,0,0,
-0,0,0,0,55,54,0,0,0,59,0,0,59,0,62,55,0,0,0,56,57,0,58,0,60,0,59,0,0,0,0,0,
-0,0,0,0,0,61,0,0,0,0,0,0,0,59,0,56,0,64,0,0,0,59,0,0,0,59,0,0,55,0,0,0,
-0,0,0,0,0,64,0,59,0,0,0,55,59,0,0,0,0,0,0,0,58,0,0,55,0,64,0,0,54,54,0,0,
-0,0,0,0,0,58,0,0,0,0,53,55,0,59,0,0,0,0,0,59,0,60,0,0,0,0,0,0,0,53,0,0,
-0,0,0,59,0,0,0,0,0,0,53,0,59,0,59,0,0,55,0,0,57,0,0,63,62,0,53,0,61,0,0,0,
-0,0,0,0,0,59,0,0,0,0,0,59,0,0,0,55,0,0,0,0,0,0,0,0,0,0,0,0,62,0,0,0,
-0,0,62,0,0,0,0,0,0,0,0,0,0,0,0,55,0,0,0,0,0,0,0,0,0,0,0,0,64,0,0,0,
-0,0,58,0,0,0,56,53,0,0,59,0,60,64,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,57,0,64,64,0,0,0,62,0,0,0,0,0,0,0,0,0,0,55,56,0,0,0,0,56,54,0,0,64,0,
-56,53,0,64,63,0,53,56,0,0,60,0,0,59,0,0,0,0,0,0,56,0,0,0,0,0,0,0,0,0,61,0,
-0,0,0,0,0,0,0,55,56,55,53,0,0,0,0,0,0,64,59,0,0,0,0,58,0,0,64,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,60,0,0,60,57,59,0,0,0,0,0,0,0,
-0,0,0,0,0,0,58,0,0,0,61,62,0,0,60,0,0,0,59,58,0,0,0,0,0,0,0,0,0,55,0,0,
-0,0,0,0,0,0,0,0,55,0,0,0,0,57,0,60,0,0,0,60,0,0,0,0,0,0,62,61,0,0,56,0
+0,69,69,69,69,69,69,69,69,69,0,0,65,65,65,0,0,0,0,0,0,0,0,0,68,68,68,68,68,68,68,0,
+0,69,69,69,69,69,69,69,69,69,0,0,65,0,65,0,0,0,0,0,0,0,0,0,68,66,66,66,66,66,68,0,
+0,69,69,70,70,69,70,70,69,69,0,0,65,0,65,0,65,65,65,0,0,0,0,0,68,66,66,66,66,66,68,0,
+0,69,69,70,70,69,0,70,69,69,0,0,65,0,65,0,65,0,65,0,65,65,65,0,68,66,66,66,66,66,68,0,
+0,69,69,70,70,69,70,70,69,69,65,65,65,0,65,0,65,0,65,0,65,0,65,63,68,68,68,68,68,68,68,0,
+0,69,69,69,69,69,69,69,69,69,0,0,0,0,65,65,65,0,65,0,65,0,65,0,0,0,0,0,0,64,0,0,
+0,69,69,69,69,69,69,69,69,69,0,0,0,0,0,0,0,0,65,65,65,0,65,65,65,65,0,0,0,64,0,0,
+0,0,0,61,64,61,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,65,0,0,0,64,0,0,
+0,0,0,61,64,61,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,65,0,0,0,64,0,0,
+0,0,0,61,64,61,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,65,0,0,0,64,62,0,
+0,0,0,61,64,61,0,0,0,0,0,0,0,70,70,72,72,70,70,72,72,70,70,0,0,65,0,0,0,64,64,0,
+0,0,0,61,64,61,69,69,69,69,69,69,69,70,70,72,72,70,70,72,72,70,70,0,0,65,0,0,0,64,64,0,
+0,0,0,61,64,61,69,69,69,0,69,69,69,72,72,72,72,72,72,72,72,72,72,0,0,65,0,0,0,64,64,0,
+0,0,0,61,64,61,61,0,0,0,0,0,0,72,72,72,72,72,72,72,72,72,72,0,0,65,0,0,0,64,0,0,
+0,0,0,61,64,61,61,61,61,61,61,61,0,70,70,72,65,65,65,65,72,70,70,0,0,65,0,0,62,64,0,0,
+0,0,0,61,64,61,63,63,63,63,63,61,0,70,70,72,65,68,68,65,72,70,70,0,0,65,65,65,64,64,0,0,
+0,0,0,61,64,61,63,63,63,63,63,61,0,72,72,68,68,68,68,65,72,72,72,0,0,65,65,65,64,64,0,0,
+0,0,0,61,64,61,63,63,63,63,63,61,0,72,72,72,65,65,65,65,72,72,72,0,0,65,65,65,64,64,0,0,
+0,0,0,61,64,61,63,63,63,63,63,61,0,70,70,72,72,70,70,72,72,72,72,0,0,0,0,0,64,64,0,0,
+0,0,0,61,64,61,61,61,61,61,61,61,0,70,70,72,72,70,70,72,72,70,70,72,72,70,70,0,64,64,0,0,
+0,0,0,61,64,61,0,0,0,0,0,0,0,70,70,72,72,70,70,72,72,70,70,72,72,70,70,0,64,64,0,0,
+0,0,0,61,64,61,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,64,64,0,0,
+0,0,0,61,64,61,66,66,66,66,66,66,66,66,66,66,0,0,0,0,0,0,0,0,0,0,0,0,64,64,0,0,
+0,0,0,61,64,61,66,66,66,66,66,66,66,66,66,66,0,0,0,0,0,0,0,0,0,0,0,0,64,64,0,0,
+0,0,0,61,64,61,61,61,61,66,66,66,61,66,66,66,0,0,0,0,0,0,0,0,0,0,0,0,64,64,0,0,
+0,0,0,61,64,61,0,0,0,0,66,66,0,66,0,66,0,0,0,0,0,63,63,63,63,63,63,63,64,64,63,0,
+0,67,67,67,67,67,67,67,0,0,0,0,0,0,66,66,0,0,0,0,0,63,63,63,63,63,63,63,64,64,63,0,
+0,67,68,68,68,68,68,67,0,62,62,62,64,64,64,64,0,0,0,0,0,63,63,63,63,63,63,63,64,64,63,0,
+0,67,68,68,68,68,68,67,0,62,62,62,64,64,64,64,64,64,64,64,64,64,64,64,64,64,64,64,64,64,63,0,
+0,67,67,67,67,67,67,67,0,62,62,62,64,64,64,64,64,64,64,64,64,64,64,64,64,64,64,64,64,64,63,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+</data>
+ </layer>
+ <layer name="Grime" width="32" height="32" opacity="0.5">
+  <data encoding="csv">
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,53,54,54,54,56,55,54,55,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+56,0,0,55,56,55,53,56,56,53,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,54,56,53,56,0,56,56,54,53,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+54,54,53,0,50,51,0,56,53,54,0,0,0,0,0,0,50,51,0,0,0,0,0,51,0,0,0,0,0,0,0,0,
+55,56,54,0,0,49,0,56,56,0,0,0,0,0,0,0,0,0,0,0,0,0,0,52,49,52,0,0,0,0,0,0,
+53,50,52,0,0,54,0,0,54,53,0,0,0,0,0,0,0,0,0,0,0,0,0,51,51,50,51,51,0,0,0,0,
+56,54,54,53,53,56,56,54,0,53,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+53,56,58,0,0,55,0,56,53,55,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,53,0,54,55,56,56,56,55,56,53,53,0,0,0,0,0,0,0,49,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,55,56,56,54,53,56,53,55,53,56,0,0,0,0,0,0,0,50,0,
+0,0,0,0,0,0,0,0,0,49,0,0,0,54,54,56,56,53,55,55,56,56,56,0,0,0,0,0,0,0,50,0,
+0,0,0,0,0,0,0,0,0,51,0,0,0,56,55,0,0,0,0,50,49,53,55,0,0,0,0,0,0,0,50,0,
+0,0,0,0,0,0,0,0,0,0,0,0,56,56,0,0,0,0,0,0,49,0,56,0,0,59,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,56,53,0,0,0,0,0,54,54,56,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,51,0,0,0,0,0,53,56,0,0,0,0,0,0,0,54,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,52,57,51,0,0,0,0,53,53,53,50,0,0,0,0,56,54,53,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,50,51,0,0,0,0,0,55,56,50,51,0,0,0,54,55,55,0,60,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,49,58,55,0,53,53,57,53,0,57,54,0,49,51,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,58,58,56,55,0,56,0,55,56,56,55,0,54,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,60,0,54,53,0,53,56,56,57,56,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,49,49,0,0,0,0,0,0,0,0,0,0,0,0,0,0,52,49,49,51,51,52,0,0,0,0,0,0,
+52,52,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,49,50,49,0,0,0,0,0,0,0,0,0,
+49,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,50,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
 </data>
  </layer>
  <layer name="Walls" width="32" height="32">
@@ -97,7 +103,7 @@
 25,0,0,9,12,0,9,12,0,0,0,0,0,46,0,1,0,46,0,46,0,3,0,46,0,0,0,0,0,0,0,19,
 25,0,0,0,0,0,0,0,0,0,10,22,22,23,0,0,0,46,0,1,0,46,0,5,47,47,20,22,11,0,10,40,
 25,0,0,0,0,0,0,0,0,0,19,44,44,43,22,22,22,23,0,0,0,46,0,0,0,0,19,44,25,0,19,44,
-43,22,11,0,0,0,10,22,22,22,44,44,44,44,44,44,44,44,22,22,22,35,22,22,11,0,19,44,25,0,19,44,
+43,22,11,0,0,0,10,22,22,22,40,44,44,44,44,44,44,43,22,22,22,35,22,22,11,0,19,44,25,0,19,44,
 44,44,25,0,0,0,19,44,44,44,44,44,44,44,44,44,44,44,44,44,44,44,44,44,25,0,19,44,25,0,19,44,
 44,44,25,0,0,0,19,44,44,44,44,44,42,28,28,28,28,28,28,28,28,28,28,41,25,0,19,44,25,0,9,41,
 44,44,25,0,0,0,9,28,28,28,28,28,12,0,0,0,0,0,0,0,0,0,0,19,25,0,19,44,25,0,0,19,
@@ -116,7 +122,7 @@
 44,44,25,0,0,0,0,0,0,0,0,0,0,0,0,0,19,44,44,44,44,44,44,44,44,44,44,25,0,0,19,44,
 44,44,25,0,0,0,10,22,22,11,0,10,11,0,3,0,19,44,44,44,42,28,28,28,28,28,28,12,0,0,9,41,
 42,28,27,4,0,2,26,28,41,25,0,19,25,0,46,0,19,44,44,44,25,0,0,0,0,0,0,0,0,0,0,19,
-25,0,0,0,0,0,0,0,19,27,47,26,27,47,8,0,19,44,44,44,25,0,0,0,0,0,0,0,0,0,0,19,
+25,0,0,0,0,0,0,0,17,27,47,26,27,47,8,0,19,44,44,44,25,0,0,0,0,0,0,0,0,0,0,19,
 25,0,0,0,0,0,0,0,46,0,0,0,0,0,0,0,9,28,28,28,12,0,0,0,0,0,0,0,0,0,0,19,
 25,0,0,0,0,0,0,0,46,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,19,
 25,0,0,0,0,0,0,0,46,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,19,
@@ -127,332 +133,247 @@
   <properties>
    <property name="isDoor" type="bool" value="false"/>
   </properties>
-  <object id="3" x="192" y="192" width="128" height="192">
+  <object id="3" name="Wall" x="192" y="192" width="128" height="192">
    <properties>
     <property name="isDoor" type="bool" value="false"/>
    </properties>
   </object>
-  <object id="4" x="384" y="192" width="128" height="192">
+  <object id="4" name="Wall" x="384" y="192" width="128" height="192">
    <properties>
     <property name="isDoor" type="bool" value="false"/>
    </properties>
   </object>
-  <object id="5" x="640" y="64" width="128" height="256">
+  <object id="5" name="Wall" x="640" y="64" width="128" height="256">
    <properties>
     <property name="isDoor" type="bool" value="false"/>
    </properties>
   </object>
-  <object id="18" x="832" y="128" width="64" height="320">
+  <object id="18" name="Wall" x="832" y="128" width="64" height="256">
    <properties>
     <property name="isDoor" type="bool" value="false"/>
    </properties>
   </object>
-  <object id="19" x="896" y="448" width="192" height="64">
+  <object id="19" name="Wall" x="896" y="448" width="256" height="64">
    <properties>
     <property name="isDoor" type="bool" value="false"/>
    </properties>
   </object>
-  <object id="20" x="1088" y="256" width="64" height="256">
+  <object id="20" name="Wall" x="1088" y="256" width="64" height="192">
    <properties>
     <property name="isDoor" type="bool" value="false"/>
    </properties>
   </object>
-  <object id="22" x="1216" y="192" width="64" height="256">
+  <object id="22" name="Wall" x="1216" y="256" width="64" height="192">
    <properties>
     <property name="isDoor" type="bool" value="false"/>
    </properties>
   </object>
-  <object id="23" x="960" y="64" width="64" height="320">
+  <object id="23" name="Wall" x="960" y="192" width="64" height="192">
    <properties>
     <property name="isDoor" type="bool" value="false"/>
    </properties>
   </object>
-  <object id="24" x="1024" y="128" width="192" height="64">
+  <object id="24" name="Wall" x="960" y="0" width="256" height="192">
    <properties>
     <property name="isDoor" type="bool" value="false"/>
    </properties>
   </object>
-  <object id="26" x="1280" y="192" width="192" height="64">
+  <object id="26" name="Wall" x="1216" y="0" width="256" height="256">
    <properties>
     <property name="isDoor" type="bool" value="false"/>
    </properties>
   </object>
-  <object id="30" x="1920" y="384" width="64" height="320">
+  <object id="30" name="Wall" x="1920" y="384" width="64" height="320">
    <properties>
     <property name="isDoor" type="bool" value="false"/>
    </properties>
   </object>
-  <object id="31" x="1920" y="896" width="64" height="768">
+  <object id="31" name="Wall" x="1920" y="896" width="64" height="768">
    <properties>
     <property name="isDoor" type="bool" value="false"/>
    </properties>
   </object>
-  <object id="32" x="640" y="384" width="192" height="64">
+  <object id="32" name="Wall" x="640" y="384" width="256" height="128">
    <properties>
     <property name="isDoor" type="bool" value="false"/>
    </properties>
   </object>
-  <object id="33" x="640" y="448" width="64" height="64">
+  <object id="34" name="Wall" x="384" y="704" width="448" height="64">
    <properties>
     <property name="isDoor" type="bool" value="false"/>
    </properties>
   </object>
-  <object id="34" x="384" y="512" width="256" height="64">
+  <object id="37" name="Wall" x="384" y="512" width="1088" height="192">
    <properties>
     <property name="isDoor" type="bool" value="false"/>
    </properties>
   </object>
-  <object id="35" x="384" y="576" width="64" height="192">
+  <object id="42" name="Wall" x="1344" y="320" width="64" height="192">
    <properties>
     <property name="isDoor" type="bool" value="false"/>
    </properties>
   </object>
-  <object id="36" x="448" y="704" width="384" height="64">
+  <object id="48" name="Wall" x="1472" y="512" width="128" height="768">
    <properties>
     <property name="isDoor" type="bool" value="false"/>
    </properties>
   </object>
-  <object id="37" x="832" y="640" width="640" height="64">
+  <object id="49" name="Wall" x="1600" y="1216" width="192" height="64">
    <properties>
     <property name="isDoor" type="bool" value="false"/>
    </properties>
   </object>
-  <object id="42" x="1344" y="320" width="64" height="192">
+  <object id="50" name="Wall" x="1728" y="1280" width="64" height="384">
    <properties>
     <property name="isDoor" type="bool" value="false"/>
    </properties>
   </object>
-  <object id="46" x="1152" y="512" width="192" height="64">
+  <object id="55" name="Wall" x="704" y="1472" width="64" height="64">
    <properties>
     <property name="isDoor" type="bool" value="false"/>
    </properties>
   </object>
-  <object id="47" x="1408" y="512" width="64" height="64">
+  <object id="56" name="Wall" x="704" y="1600" width="128" height="128">
    <properties>
     <property name="isDoor" type="bool" value="false"/>
    </properties>
   </object>
-  <object id="48" x="1472" y="512" width="128" height="768">
+  <object id="57" name="Wall" x="896" y="1600" width="64" height="128">
    <properties>
     <property name="isDoor" type="bool" value="false"/>
    </properties>
   </object>
-  <object id="49" x="1600" y="1216" width="192" height="64">
+  <object id="65" name="Wall" x="320" y="1664" width="64" height="64">
    <properties>
     <property name="isDoor" type="bool" value="false"/>
    </properties>
   </object>
-  <object id="50" x="1728" y="1280" width="64" height="384">
+  <object id="66" name="Wall" x="384" y="1600" width="256" height="128">
    <properties>
     <property name="isDoor" type="bool" value="false"/>
    </properties>
   </object>
-  <object id="55" x="704" y="1472" width="64" height="64">
+  <object id="69" name="Wall" x="512" y="1728" width="448" height="64">
    <properties>
     <property name="isDoor" type="bool" value="false"/>
    </properties>
   </object>
-  <object id="56" x="704" y="1600" width="128" height="192">
+  <object id="70" name="Wall" x="512" y="1792" width="64" height="192">
    <properties>
     <property name="isDoor" type="bool" value="false"/>
    </properties>
   </object>
-  <object id="57" x="896" y="1600" width="64" height="192">
+  <object id="72" name="Wall" x="384" y="896" width="448" height="64">
    <properties>
     <property name="isDoor" type="bool" value="false"/>
    </properties>
   </object>
-  <object id="58" x="832" y="1728" width="64" height="64">
+  <object id="73" name="Wall" x="576" y="832" width="64" height="64">
    <properties>
     <property name="isDoor" type="bool" value="false"/>
    </properties>
   </object>
-  <object id="65" x="320" y="1664" width="192" height="64">
+  <object id="74" name="Wall" x="768" y="960" width="64" height="384">
    <properties>
     <property name="isDoor" type="bool" value="false"/>
    </properties>
   </object>
-  <object id="66" x="384" y="1600" width="256" height="64">
+  <object id="76" name="Wall" x="1024" y="1408" width="320" height="448">
    <properties>
     <property name="isDoor" type="bool" value="false"/>
    </properties>
   </object>
-  <object id="68" x="576" y="1664" width="64" height="64">
+  <object id="79" name="Wall" x="1344" y="1408" width="384" height="256">
    <properties>
     <property name="isDoor" type="bool" value="false"/>
    </properties>
   </object>
-  <object id="69" x="576" y="1728" width="128" height="64">
+  <object id="80" name="Wall" x="0" y="512" width="192" height="1216">
    <properties>
     <property name="isDoor" type="bool" value="false"/>
    </properties>
   </object>
-  <object id="70" x="512" y="1728" width="64" height="256">
+  <object id="83" name="Wall" x="192" y="1664" width="64" height="64">
    <properties>
     <property name="isDoor" type="bool" value="false"/>
    </properties>
   </object>
-  <object id="72" x="384" y="896" width="448" height="64">
+  <object id="84" name="Wall" x="960" y="896" width="64" height="192">
    <properties>
     <property name="isDoor" type="bool" value="false"/>
    </properties>
   </object>
-  <object id="73" x="576" y="832" width="64" height="64">
+  <object id="85" name="Wall" x="1024" y="896" width="320" height="64">
    <properties>
     <property name="isDoor" type="bool" value="false"/>
    </properties>
   </object>
-  <object id="74" x="768" y="960" width="64" height="384">
+  <object id="86" name="Wall" x="1280" y="960" width="64" height="320">
    <properties>
     <property name="isDoor" type="bool" value="false"/>
    </properties>
   </object>
-  <object id="76" x="1024" y="1472" width="64" height="384">
+  <object id="87" name="Wall" x="960" y="1152" width="64" height="128">
    <properties>
     <property name="isDoor" type="bool" value="false"/>
    </properties>
   </object>
-  <object id="77" x="1088" y="1792" width="256" height="64">
+  <object id="88" name="Wall" x="1024" y="1216" width="256" height="64">
    <properties>
     <property name="isDoor" type="bool" value="false"/>
    </properties>
   </object>
-  <object id="78" x="1280" y="1664" width="64" height="128">
+  <object id="92" name="Wall" x="0" y="0" width="960" height="64">
    <properties>
     <property name="isDoor" type="bool" value="false"/>
    </properties>
   </object>
-  <object id="79" x="1344" y="1600" width="384" height="64">
+  <object id="93" name="Wall" x="1536" y="0" width="448" height="64">
    <properties>
     <property name="isDoor" type="bool" value="false"/>
    </properties>
   </object>
-  <object id="80" x="64" y="512" width="128" height="64">
+  <object id="94" name="Wall" x="1472" y="0" width="64" height="448">
    <properties>
     <property name="isDoor" type="bool" value="false"/>
    </properties>
   </object>
-  <object id="82" x="128" y="576" width="64" height="1088">
+  <object id="96" name="Wall" x="384" y="1344" width="448" height="128">
    <properties>
     <property name="isDoor" type="bool" value="false"/>
    </properties>
   </object>
-  <object id="83" x="64" y="1664" width="192" height="64">
+  <object id="97" name="Wall" x="832" y="1408" width="192" height="64">
    <properties>
     <property name="isDoor" type="bool" value="false"/>
    </properties>
   </object>
-  <object id="84" x="960" y="896" width="64" height="192">
+  <object id="100" name="Wall" x="0" y="64" width="64" height="448">
    <properties>
     <property name="isDoor" type="bool" value="false"/>
    </properties>
   </object>
-  <object id="85" x="1024" y="896" width="320" height="64">
+  <object id="101" name="Wall" x="0" y="1728" width="64" height="256">
    <properties>
     <property name="isDoor" type="bool" value="false"/>
    </properties>
   </object>
-  <object id="86" x="1280" y="960" width="64" height="320">
+  <object id="103" name="Wall" x="0" y="1984" width="2048" height="64">
    <properties>
     <property name="isDoor" type="bool" value="false"/>
    </properties>
   </object>
-  <object id="87" x="960" y="1152" width="64" height="128">
+  <object id="105" name="Wall" x="1984" y="0" width="64" height="1984">
    <properties>
     <property name="isDoor" type="bool" value="false"/>
    </properties>
   </object>
-  <object id="88" x="1024" y="1216" width="256" height="64">
+  <object id="109" name="Wall" x="1536" y="384" width="320" height="64">
    <properties>
     <property name="isDoor" type="bool" value="false"/>
    </properties>
   </object>
-  <object id="92" x="768" y="0" width="192" height="64">
-   <properties>
-    <property name="isDoor" type="bool" value="false"/>
-   </properties>
-  </object>
-  <object id="93" x="1536" y="0" width="448" height="64">
-   <properties>
-    <property name="isDoor" type="bool" value="false"/>
-   </properties>
-  </object>
-  <object id="94" x="1472" y="64" width="64" height="384">
-   <properties>
-    <property name="isDoor" type="bool" value="false"/>
-   </properties>
-  </object>
-  <object id="96" x="384" y="1344" width="448" height="64">
-   <properties>
-    <property name="isDoor" type="bool" value="false"/>
-   </properties>
-  </object>
-  <object id="97" x="384" y="1408" width="320" height="64">
-   <properties>
-    <property name="isDoor" type="bool" value="false"/>
-   </properties>
-  </object>
-  <object id="99" x="768" y="1408" width="960" height="64">
-   <properties>
-    <property name="isDoor" type="bool" value="false"/>
-   </properties>
-  </object>
-  <object id="100" x="0" y="64" width="64" height="448">
-   <properties>
-    <property name="isDoor" type="bool" value="false"/>
-   </properties>
-  </object>
-  <object id="101" x="0" y="1728" width="64" height="256">
-   <properties>
-    <property name="isDoor" type="bool" value="false"/>
-   </properties>
-  </object>
-  <object id="102" x="64" y="1984" width="448" height="64">
-   <properties>
-    <property name="isDoor" type="bool" value="false"/>
-   </properties>
-  </object>
-  <object id="103" x="576" y="1984" width="1408" height="64">
-   <properties>
-    <property name="isDoor" type="bool" value="false"/>
-   </properties>
-  </object>
-  <object id="105" x="1984" y="1664" width="64" height="320">
-   <properties>
-    <property name="isDoor" type="bool" value="false"/>
-   </properties>
-  </object>
-  <object id="106" x="1984" y="704" width="64" height="192">
-   <properties>
-    <property name="isDoor" type="bool" value="false"/>
-   </properties>
-  </object>
-  <object id="108" x="1984" y="64" width="64" height="320">
-   <properties>
-    <property name="isDoor" type="bool" value="false"/>
-   </properties>
-  </object>
-  <object id="109" x="1536" y="384" width="320" height="64">
-   <properties>
-    <property name="isDoor" type="bool" value="false"/>
-   </properties>
-  </object>
-  <object id="111" x="1664" y="448" width="64" height="576">
-   <properties>
-    <property name="isDoor" type="bool" value="false"/>
-   </properties>
-  </object>
-  <object id="113" x="1728" y="960" width="64" height="64">
-   <properties>
-    <property name="isDoor" type="bool" value="false"/>
-   </properties>
-  </object>
-  <object id="114" x="1792" y="448" width="64" height="576">
-   <properties>
-    <property name="isDoor" type="bool" value="false"/>
-   </properties>
-  </object>
-  <object id="115" x="64" y="0" width="576" height="64">
+  <object id="111" name="Wall" x="1664" y="448" width="192" height="576">
    <properties>
     <property name="isDoor" type="bool" value="false"/>
    </properties>
@@ -557,38 +478,50 @@
   </object>
   <object id="286" name="ItemSpawner" type="Item" x="644" y="1605" width="56" height="118">
    <properties>
-    <property name="maxTime" type="float" value="180"/>
-    <property name="minTime" type="float" value="120"/>
+    <property name="maxTime" type="float" value="120"/>
+    <property name="minTime" type="float" value="60"/>
    </properties>
   </object>
   <object id="287" name="ItemSpawner" type="Item" x="836" y="1604" width="56" height="119">
    <properties>
-    <property name="maxTime" type="float" value="180"/>
-    <property name="minTime" type="float" value="120"/>
+    <property name="maxTime" type="float" value="120"/>
+    <property name="minTime" type="float" value="60"/>
    </properties>
   </object>
   <object id="288" name="ItemSpawner" type="Item" x="581" y="1800" width="183" height="177">
    <properties>
-    <property name="maxTime" type="float" value="180"/>
-    <property name="minTime" type="float" value="120"/>
+    <property name="maxTime" type="float" value="120"/>
+    <property name="minTime" type="float" value="60"/>
    </properties>
   </object>
   <object id="289" name="ItemSpawner" type="Item" x="1922" y="1670" width="59" height="308">
    <properties>
-    <property name="maxTime" type="float" value="180"/>
-    <property name="minTime" type="float" value="120"/>
+    <property name="maxTime" type="float" value="120"/>
+    <property name="minTime" type="float" value="60"/>
    </properties>
   </object>
   <object id="290" name="ItemSpawner" type="Item" x="1029" y="966" width="244" height="245">
    <properties>
-    <property name="maxTime" type="float" value="180"/>
-    <property name="minTime" type="float" value="120"/>
+    <property name="maxTime" type="float" value="120"/>
+    <property name="minTime" type="float" value="60"/>
    </properties>
   </object>
   <object id="291" name="ItemSpawner" type="Item" x="327" y="198" width="50" height="179">
    <properties>
-    <property name="maxTime" type="float" value="180"/>
-    <property name="minTime" type="float" value="120"/>
+    <property name="maxTime" type="float" value="120"/>
+    <property name="minTime" type="float" value="60"/>
+   </properties>
+  </object>
+  <object id="292" name="ItemSpawner" type="Item" x="1541" y="69.3333" width="437.667" height="310.667">
+   <properties>
+    <property name="maxTime" type="float" value="120"/>
+    <property name="minTime" type="float" value="60"/>
+   </properties>
+  </object>
+  <object id="293" name="ItemSpawner" type="Item" x="1476" y="1287" width="246" height="116">
+   <properties>
+    <property name="maxTime" type="float" value="120"/>
+    <property name="minTime" type="float" value="60"/>
    </properties>
   </object>
  </objectgroup>

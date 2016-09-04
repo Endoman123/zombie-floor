@@ -4,7 +4,7 @@ import com.badlogic.ashley.core.Component;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.utils.viewport.Viewport;
-import com.jtulayan.handler.GUIHandler;
+import com.jtulayan.util.GUIHandler;
 
 /**
  * A {@link Component} with a {@link Stage} with the intended use as a GUI canvas.
@@ -16,5 +16,9 @@ public class CanvasComponent implements Component {
 
     public CanvasComponent(Viewport v, Batch b){
         CANVAS = new Stage(v, b);
+    }
+
+    public CanvasComponent(){
+        CANVAS = new Stage();
     }
 }

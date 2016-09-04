@@ -9,5 +9,6 @@ import com.badlogic.ashley.core.Entity;
  * @author Jared Tulayan
  */
 public class DamageComponent implements Component {
-    public int damage = 10;
+    public float damage = 10;
+    public Entity owner;
 }

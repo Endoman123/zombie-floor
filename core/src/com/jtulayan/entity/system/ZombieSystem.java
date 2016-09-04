@@ -2,7 +2,6 @@ package com.jtulayan.entity.system;
 
 import com.badlogic.ashley.core.*;
 import com.badlogic.ashley.systems.IteratingSystem;
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.utils.Array;
 import com.jtulayan.entity.GameObjects;
@@ -65,13 +64,14 @@ public class ZombieSystem extends IteratingSystem {
         for (Entity p : PLAYERS) {
             TransformComponent playerTransform = Mapper.TRANSFORM_MAPPER.get(p);
 
-            if (target == null) {
-                if (transform.WORLD_ORIGIN.dst2(playerTransform.WORLD_ORIGIN) <= ai.targetRange * ai.targetRange)
+            if (transform.WORLD_ORIGIN.dst2(playerTransform.WORLD_ORIGIN) <= ai.targetRange * ai.targetRange) {
+                if (target == null)
                     target = p;
-            } else {
-                TransformComponent targetTrans = Mapper.TRANSFORM_MAPPER.get(target);
-                if (transform.WORLD_ORIGIN.dst2(playerTransform.WORLD_ORIGIN) <= transform.WORLD_ORIGIN.dst2(targetTrans.WORLD_ORIGIN))
-                    target = p;
+                else {
+                    TransformComponent targetTrans = Mapper.TRANSFORM_MAPPER.get(target);
+                    if (transform.WORLD_ORIGIN.dst2(playerTransform.WORLD_ORIGIN) <= transform.WORLD_ORIGIN.dst2(targetTrans.WORLD_ORIGIN))
+                        target = p;
+                }
             }
         }
 
@@ -89,12 +89,7 @@ public class ZombieSystem extends IteratingSystem {
             if (ai.targetDirection >= 360)
                 ai.targetDirection -= 360;
         } else {
-            if (ai.state != AIStates.WANDER) {
-                ai.state = AIStates.WANDER;
-                ai.targetDirection = MathUtils.random(359);
-                ai.randomTimer = MathUtils.random(2, 5);
-            }
-
+            ai.state = AIStates.WANDER;
             ai.randomTimer -= deltaTime;
 
             if (ai.randomTimer <= 0) {
@@ -112,8 +107,6 @@ public class ZombieSystem extends IteratingSystem {
             else
                 angleDiff = -((360 - transform.rotation) + ai.targetDirection);
         }
-
-        Gdx.app.log("ZOMBIE", "angleDiff = " + angleDiff);
 
         // Rotate zombie towards target
         if (Math.abs(angleDiff) > 10) {
@@ -144,7 +137,9 @@ public class ZombieSystem extends IteratingSystem {
                 else if (ai.attackTimer > 0)
                     ai.attackTimer -= deltaTime;
                 else if (ai.attackTimer <= 0) {
-                    getEngine().addEntity(GameObjects.createSlash(transform.WORLD_ORIGIN.x, transform.WORLD_ORIGIN.y, ai.attackRange, transform.rotation));
+                    getEngine().addEntity(
+                            GameObjects.createSlash(transform.WORLD_ORIGIN.x, transform.WORLD_ORIGIN.y, ai.attackRange, transform.rotation, 5, entity)
+                    );
                     ai.attackTimer = 1 / ai.attackRate;
                 }
             }

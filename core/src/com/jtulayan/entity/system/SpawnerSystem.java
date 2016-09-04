@@ -17,7 +17,8 @@ import com.jtulayan.entity.component.TransformComponent;
  * @author Jared Tulayan
  */
 public class SpawnerSystem extends IteratingSystem {
-    int zombieCount = 0;
+    private int zombieCount = 0;
+    private final int ZOMBIE_LIMIT = 50;
 
     public SpawnerSystem() {
         super(Family.all(SpawnerComponent.class).get());
@@ -54,19 +55,24 @@ public class SpawnerSystem extends IteratingSystem {
 
             switch(spawner.TYPE) {
                 case ZOMBIE:
-                    if (zombieCount < 50)
+                    if (zombieCount < ZOMBIE_LIMIT)
                         getEngine().addEntity(GameObjects.createZombie(x, y));
                     break;
 
                 case ITEM:
-                    int chance = MathUtils.random(1, 10);
+                    int chance = MathUtils.random(2);
 
-                    if (chance >= 3)
-                        getEngine().addEntity(GameObjects.createAmmoBox(x, y, 120));
-                    else if (chance < 8)
-                        getEngine().addEntity(GameObjects.createBandage(x, y, 120));
-                    else
-                        getEngine().addEntity(GameObjects.createDressing(x, y, 120));
+                    switch (chance) {
+                        case 0:
+                            getEngine().addEntity(GameObjects.createAmmoBox(x, y, 120));
+                            break;
+                        case 1:
+                            getEngine().addEntity(GameObjects.createBandage(x, y, 120));
+                            break;
+                        case 2:
+                            getEngine().addEntity(GameObjects.createDressing(x, y, 120));
+                            break;
+                    }
                     break;
             }
 

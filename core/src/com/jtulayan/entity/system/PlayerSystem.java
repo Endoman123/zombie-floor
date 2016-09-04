@@ -58,6 +58,12 @@ public class PlayerSystem extends IteratingSystem {
         ColliderComponent collider = Mapper.COLLIDER_MAPPER.get(entity);
         InputComponent input = Mapper.INPUT_MAPPER.get(entity);
 
+        // Normalize health
+        health.health = MathUtils.clamp(health.health, 0, health.maxHealth);
+
+        if (health.health == 0)
+            getEngine().removeEntity(entity);
+
         // Zero out our movement normal
         movement.NORMAL.setZero();
 
@@ -111,10 +117,10 @@ public class PlayerSystem extends IteratingSystem {
 
         for (Entity e : collider.collidingWith) {
             if (Mapper.ITEM_MAPPER.has(e)) {
-                ItemComponent item = Mapper.ITEM_MAPPER.get(e);
-
                 if (Gdx.input.isKeyJustPressed(Input.Keys.E))
                     Mapper.ITEM_MAPPER.get(e).handler.pickup(entity);
+
+                break;
             }
         }
 
@@ -122,8 +128,8 @@ public class PlayerSystem extends IteratingSystem {
             inventory.drop();
         }
 
-        if (Gdx.input.isKeyJustPressed(Input.Keys.R) && inventory.getActiveItem() != null && Mapper.GUN_MAPPER.has(inventory.getActiveItem()))
-            Mapper.GUN_MAPPER.get(inventory.getActiveItem()).reload();
+        if (Gdx.input.isKeyJustPressed(Input.Keys.R) && inventory.getActiveItem() != null && Mapper.AMMO_MAPPER.has(inventory.getActiveItem()))
+            Mapper.AMMO_MAPPER.get(inventory.getActiveItem()).reload();
 
         // Rotate movement normal to face mouse
         movement.NORMAL.rotate(transform.rotation - 90);
@@ -137,10 +143,5 @@ public class PlayerSystem extends IteratingSystem {
         if (Mapper.CANVAS_MAPPER.has(entity))
             Mapper.CANVAS_MAPPER.get(entity).handler.update(deltaTime);
 
-        health.health = MathUtils.clamp(health.health, 0, health.maxHealth);
-
-        if (health.health == 0) {
-            getEngine().removeEntity(entity);
-        }
     }
 }

@@ -1,4 +1,4 @@
-package com.jtulayan.handler;
+package com.jtulayan.util;
 
 /**
  * Interface used to interact with GUI; can be defined anonymously

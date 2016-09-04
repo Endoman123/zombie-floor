@@ -3,115 +3,193 @@ gameobjects.png
 format: RGBA8888
 filter: Nearest,Nearest
 repeat: none
-badlogic
+items/chainsaw
   rotate: false
-  xy: 1, 196
-  size: 256, 256
-  orig: 256, 256
-  offset: 0, 0
-  index: -1
-slash
-  rotate: false
-  xy: 1, 66
-  size: 128, 128
-  orig: 128, 128
-  offset: 0, 0
-  index: -1
-player
-  rotate: false
-  xy: 259, 420
-  size: 64, 32
-  orig: 64, 32
-  offset: 0, 0
-  index: -1
-zombie
-  rotate: false
-  xy: 1, 32
-  size: 64, 32
-  orig: 64, 32
-  offset: 0, 0
-  index: -1
-chainsaw
-  rotate: false
-  xy: 131, 170
+  xy: 1, 39
   size: 64, 24
   orig: 64, 24
   offset: 0, 0
   index: -1
-sword
+items/ammobox
   rotate: false
-  xy: 259, 402
+  xy: 1, 1
+  size: 39, 36
+  orig: 39, 36
+  offset: 0, 0
+  index: -1
+items/sword
+  rotate: false
+  xy: 67, 47
   size: 64, 16
   orig: 64, 16
   offset: 0, 0
   index: -1
-lightsaber
+items/lightsaber
   rotate: false
-  xy: 325, 448
+  xy: 67, 41
   size: 64, 4
   orig: 64, 4
   offset: 0, 0
   index: -1
-rifle
+items/rifle
   rotate: false
-  xy: 1, 15
+  xy: 133, 48
   size: 46, 15
   orig: 46, 15
   offset: 0, 0
   index: -1
-sniperrifle
+items/sniperrifle
   rotate: false
-  xy: 67, 53
+  xy: 181, 52
   size: 46, 11
   orig: 46, 11
   offset: 0, 0
   index: -1
-shotgun
+items/shotgun
   rotate: false
-  xy: 131, 159
+  xy: 133, 37
   size: 45, 9
   orig: 45, 9
   offset: 0, 0
   index: -1
-ammobox
+items/bandage
   rotate: false
-  xy: 197, 170
-  size: 24, 24
-  orig: 24, 24
+  xy: 42, 21
+  size: 32, 16
+  orig: 32, 16
   offset: 0, 0
   index: -1
-bullet
+items/pistol
   rotate: false
-  xy: 259, 392
-  size: 32, 8
-  orig: 32, 8
-  offset: 0, 0
-  index: -1
-pistol
-  rotate: false
-  xy: 325, 429
+  xy: 42, 2
   size: 21, 17
   orig: 21, 17
   offset: 0, 0
   index: -1
-bandage
+items/dressing
   rotate: false
-  xy: 1, 1
-  size: 24, 12
-  orig: 24, 12
-  offset: 0, 0
-  index: -1
-dressing
-  rotate: false
-  xy: 67, 35
+  xy: 76, 23
   size: 16, 16
   orig: 16, 16
   offset: 0, 0
   index: -1
-knife
+items/knife
   rotate: false
-  xy: 131, 151
+  xy: 229, 57
   size: 24, 6
   orig: 24, 6
+  offset: 0, 0
+  index: -1
+
+gameobjects2.png
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+misc/badlogic
+  rotate: false
+  xy: 1, 67
+  size: 256, 256
+  orig: 256, 256
+  offset: 0, 0
+  index: -1
+misc/glow
+  rotate: false
+  xy: 1, 1
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+misc/bullet
+  rotate: false
+  xy: 259, 315
+  size: 32, 8
+  orig: 32, 8
+  offset: 0, 0
+  index: -1
+
+gameobjects3.png
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+player/walk3
+  rotate: false
+  xy: 1, 32
+  size: 41, 30
+  orig: 41, 30
+  offset: 0, 0
+  index: -1
+player/walk1
+  rotate: false
+  xy: 1, 1
+  size: 34, 29
+  orig: 34, 29
+  offset: 0, 0
+  index: -1
+player/walk2
+  rotate: false
+  xy: 44, 29
+  size: 21, 33
+  orig: 21, 33
+  offset: 0, 0
+  index: -1
+player/body
+  rotate: false
+  xy: 67, 26
+  size: 15, 36
+  orig: 15, 36
+  offset: 0, 0
+  index: -1
+player/still
+  rotate: false
+  xy: 84, 34
+  size: 9, 28
+  orig: 9, 28
+  offset: 0, 0
+  index: -1
+player/head
+  rotate: false
+  xy: 95, 48
+  size: 16, 14
+  orig: 16, 14
+  offset: 0, 0
+  index: -1
+
+gameobjects4.png
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+zombie/body1
+  rotate: false
+  xy: 1, 17
+  size: 32, 36
+  orig: 32, 36
+  offset: 0, 0
+  index: -1
+zombie/body2
+  rotate: false
+  xy: 35, 17
+  size: 31, 36
+  orig: 31, 36
+  offset: 0, 0
+  index: -1
+zombie/legs
+  rotate: false
+  xy: 68, 25
+  size: 9, 28
+  orig: 9, 28
+  offset: 0, 0
+  index: -1
+zombie/head2
+  rotate: false
+  xy: 1, 1
+  size: 16, 14
+  orig: 16, 14
+  offset: 0, 0
+  index: -1
+zombie/head1
+  rotate: false
+  xy: 79, 39
+  size: 15, 14
+  orig: 15, 14
   offset: 0, 0
   index: -1

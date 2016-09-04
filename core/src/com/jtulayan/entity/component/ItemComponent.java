@@ -2,7 +2,7 @@ package com.jtulayan.entity.component;
 
 import com.badlogic.ashley.core.Component;
 import com.badlogic.ashley.core.Entity;
-import com.jtulayan.handler.ItemHandler;
+import com.jtulayan.util.ItemHandler;
 
 /**
  * {@link Component} that makes an {@link Entity} into an object that a player can hold.
