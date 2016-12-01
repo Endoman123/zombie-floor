@@ -19,6 +19,6 @@ public class ZComparator implements Comparator<Entity> {
 
     @Override
     public int compare(Entity e1, Entity e2) {
-        return (int) Math.signum(rm.get(e1).z - rm.get(e2).z);
+        return (int) Math.signum((rm.has(e1) ? rm.get(e1).z : 999) - (rm.has(e2) ? rm.get(e2).z : 999));
     }
 }

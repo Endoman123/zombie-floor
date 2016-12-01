@@ -1,0 +1,52 @@
+[
+{
+	class: com.jtulayan.util.ScoreEntry
+	NAME: "test"
+	SCORE: 0
+}
+{
+	class: com.jtulayan.util.ScoreEntry
+	NAME: ""
+	SCORE: 0
+}
+{
+	class: com.jtulayan.util.ScoreEntry
+	NAME: ""
+	SCORE: 0
+}
+{
+	class: com.jtulayan.util.ScoreEntry
+	NAME: ""
+	SCORE: 0
+}
+{
+	class: com.jtulayan.util.ScoreEntry
+	NAME: ""
+	SCORE: 0
+}
+{
+	class: com.jtulayan.util.ScoreEntry
+	NAME: ""
+	SCORE: 0
+}
+{
+	class: com.jtulayan.util.ScoreEntry
+	NAME: ""
+	SCORE: 0
+}
+{
+	class: com.jtulayan.util.ScoreEntry
+	NAME: ""
+	SCORE: 0
+}
+{
+	class: com.jtulayan.util.ScoreEntry
+	NAME: ""
+	SCORE: 0
+}
+{
+	class: com.jtulayan.util.ScoreEntry
+	NAME: ""
+	SCORE: 0
+}
+]

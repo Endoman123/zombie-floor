@@ -40,11 +40,10 @@ public class MenuScreen extends ScreenAdapter {
 
         final VisTextButton
                 START = new VisTextButton("Start"),
-                OPTIONS = new VisTextButton("Options"),
+                HIGH_SCORE = new VisTextButton("High Score"),
                 QUIT = new VisTextButton("Quit");
 
         final Skin SKIN = ((Skin) ASSETS.MANAGER.get(Assets.UI.SKIN));
-       /* final Table TABLE = new Table();*/
 
         final Pixmap BG_CANVAS = new Pixmap(1, 1, Pixmap.Format.RGBA8888);
 
@@ -52,13 +51,9 @@ public class MenuScreen extends ScreenAdapter {
         BG_CANVAS.fill();
         SKIN.add("canvas", new Texture(BG_CANVAS));
 
-        final Image BG = new Image(SKIN.newDrawable("canvas", Color.MAGENTA)),
-                    TITLE = new Image(SKIN.getDrawable("title"));
-
-/*        final TextButton
-                START = new TextButton("Start", SKIN, "toggle"),
-                OPTIONS = new TextButton("Options", SKIN, "toggle"),
-                EXIT = new TextButton("Exit", SKIN, "toggle");*/
+        final Image
+                BG = new Image(SKIN.newDrawable("canvas", Color.MAGENTA)),
+                TITLE = new Image(SKIN.getDrawable("title"));
 
         final ChangeListener LISTENER = new ChangeListener() {
             @Override
@@ -66,8 +61,8 @@ public class MenuScreen extends ScreenAdapter {
                 if (((Button) actor).isChecked()) {
                     if (actor == START)
                         PARENT.setScreen(new GameScreen(PARENT));
-                    else if (actor == OPTIONS)
-                        PARENT.setScreen(new MenuScreen(PARENT));
+                    else if (actor == HIGH_SCORE)
+                        PARENT.setScreen(new HighScoreScreen(PARENT));
                     else if (actor == QUIT)
                         Gdx.app.exit();
                 }
@@ -76,13 +71,13 @@ public class MenuScreen extends ScreenAdapter {
 
         TITLE.setScaling(Scaling.fit);
         START.addListener(LISTENER);
-        OPTIONS.addListener(LISTENER);
+        HIGH_SCORE.addListener(LISTENER);
         QUIT.addListener(LISTENER);
 
         TABLE.center().pad(20).setFillParent(true);
         TABLE.add(TITLE).pad(20).row();
         TABLE.add(START).pad(10).size(100, 32).row();
-        TABLE.add(OPTIONS).pad(10).size(100, 32).row();
+        //TABLE.add(HIGH_SCORE).pad(10).size(100, 32).row();
         TABLE.add(QUIT).pad(10).size(100, 32);
 
         BG.setFillParent(true);

@@ -208,15 +208,15 @@ public class GameObjects {
         healthFill.setColor(Color.RED);
         staminaFill.setColor(Color.GOLD);
 
-        BARS.add(healthBar).align(Align.left).width(256).height(32).row();
-        BARS.add(staminaBar).align(Align.left).width(128).height(32);
+        BARS.add(healthBar).align(Align.left).width(256).height(32).expandX().row();
+        BARS.add(staminaBar).align(Align.left).width(128).height(32).expandX();
 
         TABLE.pad(10).setFillParent(true);
         TABLE.add(BARS).align(Align.left).expandX();
-        TABLE.add(time).align(Align.topRight);
-        TABLE.row().getTable().add().expand().row();
-        TABLE.add(action).align(Align.center).row();
-        TABLE.add(inventoryGrid).align(Align.center);
+        TABLE.add(time).align(Align.topRight).expandX().row();
+        TABLE.add().expand().fill().colspan(2).row();
+        TABLE.add(action).align(Align.center).expandX().colspan(2).row();
+        TABLE.add(inventoryGrid).align(Align.center).colspan(2).expandX();
 
         for (int r = 0; r < inventory.STORAGE.length; r++) {
             for (int c = 0; c < inventory.STORAGE[r].length; c++) {

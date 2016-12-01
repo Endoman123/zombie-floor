@@ -56,11 +56,7 @@ public class CollisionSystem extends IteratingSystem {
 
         // For debug purposes, draw collider, collider origin, and WORLD_ORIGIN of transform
         if (shapeRenderer != null && shapeRenderer.isDrawing()) {
-            shapeRenderer.polygon(collider.body.getTransformedVertices());
-            shapeRenderer.circle(collider.body.getX() + collider.body.getOriginX(), collider.body.getY() + collider.body.getOriginY(), 3);
-            shapeRenderer.setColor(Color.BLUE);
-            shapeRenderer.circle(transform.WORLD_ORIGIN.x, transform.WORLD_ORIGIN.y, 3);
-            shapeRenderer.setColor(Color.RED);
+
         }
 
         // Snap collider position to transform's origin

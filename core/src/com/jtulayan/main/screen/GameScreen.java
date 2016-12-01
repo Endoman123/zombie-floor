@@ -6,7 +6,7 @@ import com.badlogic.ashley.core.EntitySystem;
 import com.badlogic.ashley.core.PooledEngine;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
-import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.ScreenAdapter;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.maps.MapProperties;
 import com.badlogic.gdx.math.MathUtils;
@@ -19,7 +19,7 @@ import com.sun.javafx.geom.Dimension2D;
 /**
  * @author Jared Tulayan
  */
-public class GameScreen implements Screen {
+public class GameScreen extends ScreenAdapter {
     private static final int UNITS_ON_SCREEN = 960;
     private final ZombieFloor PARENT;
     private final Engine ENGINE;
@@ -33,7 +33,7 @@ public class GameScreen implements Screen {
 
         GameObjects.setEngine(ENGINE);
 
-        ENGINE.addSystem(new CollisionSystem(gameCam));
+        ENGINE.addSystem(new CollisionSystem(/*gameCam*/));
         ENGINE.addSystem(new RenderSystem(PARENT.getBatch(), gameCam, PARENT.getViewport()));
         ENGINE.addSystem(new PlayerSystem(gameCam));
         ENGINE.addSystem(new ZombieSystem(ENGINE.getSystem(PlayerSystem.class)));
@@ -60,6 +60,7 @@ public class GameScreen implements Screen {
         ENGINE.addEntity(GameObjects.createAmmoBox(400, 200, 120));
         ENGINE.addEntity(GameObjects.createKnife(300, 100, 120));
 
+        ENGINE.getSystem(RenderSystem.class).setDebug(false);
     }
 
     @Override
@@ -110,15 +111,5 @@ public class GameScreen implements Screen {
         for (EntitySystem s : ENGINE.getSystems()) {
             s.setProcessing(true);
         }
-    }
-
-    @Override
-    public void hide() {
-
-    }
-
-    @Override
-    public void dispose() {
-
     }
 }

@@ -20,6 +20,7 @@ import com.jtulayan.entity.component.*;
  *
  * @author Jared Tulayan
  */
+@SuppressWarnings("unchecked")
 public class PlayerSystem extends IteratingSystem {
     private final Camera CAMERA;
     private final ShapeRenderer DEBUG;
@@ -56,7 +57,6 @@ public class PlayerSystem extends IteratingSystem {
         InventoryComponent inventory = Mapper.INVENTORY_MAPPER.get(entity);
         MovementComponent movement = Mapper.MOVEMENT_MAPPER.get(entity);
         ColliderComponent collider = Mapper.COLLIDER_MAPPER.get(entity);
-        InputComponent input = Mapper.INPUT_MAPPER.get(entity);
 
         // Normalize health
         health.health = MathUtils.clamp(health.health, 0, health.maxHealth);
@@ -107,7 +107,7 @@ public class PlayerSystem extends IteratingSystem {
             if (inventory.getActiveItem() != null) {
                 ItemComponent item = Mapper.ITEM_MAPPER.get(inventory.getActiveItem());
 
-                if (item.auto || !item.auto && Gdx.input.justTouched())
+                if (item.auto || Gdx.input.justTouched())
                     inventory.use();
             }
         }

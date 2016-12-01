@@ -18,7 +18,7 @@ public class CanvasComponent implements Component {
         CANVAS = new Stage(v, b);
     }
 
-    public CanvasComponent(){
+    public CanvasComponent() {
         CANVAS = new Stage();
     }
 }
