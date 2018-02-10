@@ -1,5 +1,6 @@
 package com.jtulayan.util;
 
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.utils.Array;
@@ -10,24 +11,24 @@ import com.badlogic.gdx.utils.Array;
  * @author Jared Tulayan
  */
 public abstract class SpriteAnimation {
-    public final Animation ANIMATION;
+    public final Animation<TextureRegion> ANIMATION;
     public boolean isLooping;
     protected float stateTime;
 
     public SpriteAnimation(float frameDuration, TextureRegion... frames) {
-        ANIMATION = new Animation(frameDuration, frames);
+        ANIMATION = new Animation<>(frameDuration, frames);
     }
 
     public SpriteAnimation(float frameDuration, Array<TextureRegion> frames) {
-        ANIMATION = new Animation(frameDuration, frames);
+        ANIMATION = new Animation<>(frameDuration, frames);
     }
 
     public SpriteAnimation(float frameDuration, Array<TextureRegion> frames, Animation.PlayMode playMode) {
-        ANIMATION = new Animation(frameDuration, frames, playMode);
+        ANIMATION = new Animation<>(frameDuration, frames, playMode);
     }
 
     public SpriteAnimation(float frameDuration, Animation.PlayMode playMode, TextureRegion... frames) {
-        ANIMATION = new Animation(frameDuration, new Array<TextureRegion>(frames.clone()), playMode);
+        ANIMATION = new Animation<>(frameDuration, new Array<>(frames.clone()), playMode);
     }
 
     public void update(float dt) {

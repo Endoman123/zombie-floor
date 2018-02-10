@@ -15,7 +15,7 @@ allprojects {
     version = '1.0'
     ext {
         appName = "Zombie Floor"
-        gdxVersion = '1.9.4'
+        gdxVersion = '1.9.8'
         roboVMVersion = '2.1.0'
         ashleyVersion = '1.7.0'
         aiVersion = '1.8.0'
@@ -56,4 +56,8 @@ project(":core") {
 
 tasks.eclipse.doLast {
     delete ".project"
+}
+
+task wrapper(type: Wrapper) {
+    gradleVersion = '4.4.1'
 }
